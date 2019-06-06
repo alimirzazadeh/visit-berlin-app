@@ -1,14 +1,1 @@
-[debug] Full compilation, no sources in previous analysis.
-[debug] All sources are invalidated.
-[debug] Recompiling all 1 sources: invalidated sources (1) exceeded 50.0% of all sources
-[info] Compiling 1 Scala source to C:\Users\npoul\CS2340\project\target\scala-2.12\classes ...
-[debug] Getting org.scala-sbt:compiler-bridge_2.12:1.2.5:compile for Scala 2.12.8
-[debug] Getting org.scala-sbt:compiler-bridge_2.12:1.2.5:compile for Scala 2.12.8
-[debug] [zinc] Running cached compiler 52d50fa8 for Scala compiler version 2.12.8
-[debug] [zinc] The Scala compiler is invoked with:
-[debug] 	-bootclasspath
-[debug] 	C:\Program Files\Java\jdk1.8.0_201\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_201\jre\classes;C:\Users\npoul\.ivy2\cache\org.scala-lang\scala-library\jars\scala-library-2.12.8.jar
-[debug] 	-classpath
-[debug] 	C:\Users\npoul\CS2340\project\target\scala-2.12\classes
-[debug] Scala compilation took 2.875489124 s
-[info] Done compiling.
+[0m[[0m[0mdebug[0m] [0m[0mFull compilation, no sources in previous analysis.[0m
