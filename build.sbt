@@ -1,4 +1,4 @@
-name := """hello-play"""
+name := """visit-berlin-app-team3"""
 version := "1.0-SNAPSHOT"
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 resolvers += Resolver.sonatypeRepo("snapshots")
