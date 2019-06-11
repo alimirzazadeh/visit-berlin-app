@@ -1,3 +1,5 @@
+package controllers
+
 import scala.util.hashing.MurmurHash3
 
 class Account(val firstName: String, val lastName: String, val email: String, val username: String,
