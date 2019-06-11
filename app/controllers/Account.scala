@@ -34,7 +34,7 @@ class Account(val firstName: String, val lastName: String, val email: String, va
   def makeStringList(acc: Account): List[String] = {
     List(s"$firstName", s"$lastName", s"$email", s"$username", s"$passwordHash.toString()")
   }
-  
+
   override def equals(other: Any): Boolean = {
     other match {
       case that: Account =>
