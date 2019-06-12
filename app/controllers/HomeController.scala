@@ -16,6 +16,14 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.hello())
   }
 
+  // Home Page
+  def index = Action {
+    Ok(views.html.index(assetsFinder))
+  }
+
+  def register = Action {
+    Ok(views.html.register(assetsFinder))
+  }
 
   def after = Action { implicit request =>
     print("HIIII")
