@@ -1,5 +1,6 @@
 GET /hello controllers.HomeController.hello
 GET /register controllers.HomeController.register
+GET /login controllers.HomeController.login
 GET /index controllers.HomeController.index
 GET  /assets/*file   controllers.Assets.versioned(path="/public", file)
 GET /after controllers.HomeController.before

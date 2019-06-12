@@ -12,6 +12,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   def hello = Action {
     Ok(views.html.hello())
   }
+
   def before = Action {
     Ok(views.html.hello())
   }
@@ -23,6 +24,10 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
 
   def register = Action {
     Ok(views.html.register(assetsFinder))
+  }
+
+  def login = Action {
+    Ok(views.html.login(assetsFinder))
   }
 
   def after = Action { implicit request =>
