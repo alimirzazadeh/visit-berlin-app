@@ -7,7 +7,7 @@ class Account(val firstName: String, val lastName: String, val email: String, va
 
   // Name fields provided will already be trimmed and made uppercase
   require(s"$firstName $lastName".matches("^([A-Z]+('?[A-Z]*?|( ?|-?)(?=[A-Z])))+$"),
-    "Name may only contain letters and singular diacriticals.")
+    "Name may only contain capital letters and singular diacriticals.")
 
   require(
     email.matches("^([\\w\\d!#$%&'*+-\\/=?^`{|}~]+(\\.?(?=[\\w\\d]))[\\w\\d]*?)+" +
