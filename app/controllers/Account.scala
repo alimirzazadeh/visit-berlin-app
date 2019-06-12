@@ -3,9 +3,9 @@ package controllers
 import java.security.MessageDigest
 import scala.util.Random
 
-case class Account(val email: String, password: String, val profile: Profile) {
+case class Account(email: String, private val password: String, profile: Profile) {
 
-  val salt = Account.generateSalt
+  val salt = Account.generateSalt(8)
   val passwordHash = Account.hashPassword(password, salt)
 
   require(
@@ -15,11 +15,11 @@ case class Account(val email: String, password: String, val profile: Profile) {
     email.split("@")(1).length() <= 255, "Email address is of improper format.")
 
   def changeEmail(newEmail: String) = {
-    this.copy(email = newEmail)
+    copy(email = newEmail)
   }
 
   def changePassword(newPassword: String) = {
-    this.copy(password = newPassword)
+    copy(password = newPassword)
   }
 
   def makeStringList: List[String] = {
@@ -47,13 +47,15 @@ object Account {
       .map("%02x".format(_)).mkString
   }
 
-  def generateSalt: String = {
+  def generateSalt(n: Int): String = {
     val allowed = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
     val rand = new Random()
-    val saltLetters: List[Char] = List()
-    for (i <- 0 to 7) {
-      allowed.charAt(rand.nextInt(36)) :: saltLetters
+    def generateSalt(n: Int, saltLetters: List[Char]): List[Char] = {
+      n match {
+        case 0 => saltLetters
+        case _ => generateSalt(n - 1, allowed.charAt(rand.nextInt(36)) :: saltLetters)
+      }
     }
-    saltLetters.mkString
+    generateSalt(n, List()).mkString
   }
 }
