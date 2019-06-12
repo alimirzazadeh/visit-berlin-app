@@ -19,7 +19,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
 
   def after = Action { implicit request =>
     print("HIIII")
-    Ok(views.html.after(request.body.asFormUrlEncoded.toString))
+    Ok(views.html.after(request.body.asFormUrlEncoded.get("firstname").head))
   }
 
   val userForm = Form(
