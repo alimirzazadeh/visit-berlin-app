@@ -20,7 +20,7 @@ case class Account(email: String, passwordHash: String, salt: String, profile: P
   }
 
   def makeStringList: List[String] = {
-    List(s"$email", s"$passwordHash", s"$salt")
+    List(s"$email", s"$passwordHash", s"$salt", s"$admin")
   }
 
   override def equals(other: Any): Boolean = {
