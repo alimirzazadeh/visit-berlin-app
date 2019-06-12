@@ -1,13 +1,12 @@
 package controllers
 
-import scala.util.hashing.MurmurHash3
+import java.security.MessageDigest
+import scala.util.Random
 
-class Account(val firstName: String, val lastName: String, val email: String, val username: String,
-              val passwordHash: Long) {
+case class Account(email: String, private val password: String, profile: Profile) {
 
-  // Name fields provided will already be trimmed and made uppercase
-  require(s"$firstName $lastName".matches("^([A-Z]+('?[A-Z]*?|( ?|-?)(?=[A-Z])))+$"),
-    "Name may only contain letters and singular diacriticals.")
+  val salt: String = Account.generateSalt(8)
+  val passwordHash: String = Account.hashPassword(password, salt)
 
   require(
     email.matches("^([\\w\\d!#$%&'*+-\\/=?^`{|}~]+(\\.?(?=[\\w\\d]))[\\w\\d]*?)+" +
@@ -15,61 +14,48 @@ class Account(val firstName: String, val lastName: String, val email: String, va
     email.split("@")(0).length() <= 64 &&
     email.split("@")(1).length() <= 255, "Email address is of improper format.")
 
-  def changeFirstName(newFirstName: String): Account = {
-    Account(newFirstName, lastName, email, username, passwordHash)
-  }
-
-  def changeLastName(newLastName: String): Account = {
-    Account(firstName, newLastName, email, username, passwordHash)
-  }
-
-  def changeUsername(newUsername: String): Account = {
-    Account(firstName, lastName, email, newUsername, passwordHash)
+  def changeEmail(newEmail: String): Account = {
+    copy(email = newEmail)
   }
 
   def changePassword(newPassword: String): Account = {
-    Account(firstName, lastName, email, username, newPassword)
+    copy(password = newPassword)
   }
 
-
+  def makeStringList: List[String] = {
+    List(s"$email", s"$passwordHash", s"$salt")
+  }
 
   override def equals(other: Any): Boolean = {
     other match {
       case that: Account =>
-        this.firstName == that.firstName &&
-          this.lastName == that.lastName &&
-          this.username == that.username &&
-          this.passwordHash == that.passwordHash
+        this.email == that.email && this.passwordHash == that.passwordHash
       case _ => false
     }
   }
 
   override def toString: String = {
-    s"User $firstName $lastName -- Email: $email, Username: $username, Password Hash: $passwordHash"
+    s"Email: $email, Password Hash: $passwordHash"
   }
 }
-/*
-class AccountParameter(info: String)
-case class F(info: String) extends AccountParameter(info)
-case class L(info: String) extends AccountParameter(info)
-case class U(info: String) extends AccountParameter(info)
-case class P(info: String) extends AccountParameter(info)
-*/
+
 object Account {
-  def hashPassword(password: String): Long = {
-    MurmurHash3.stringHash(password)
+
+  def hashPassword(password: String, salt: String): String = {
+    MessageDigest.getInstance("SHA-256")
+      .digest(s"$password$salt".getBytes("UTF-8"))
+      .map("%02x".format(_)).mkString
   }
 
-  def apply(firstName: String, lastName: String, email: String, username: String, passwordHash: Long): Account = {
-    new Account(firstName, lastName, email, username, passwordHash)
-  }
-
-  def apply(firstName: String, lastName: String, email: String, username: String, password: String): Account = {
-    new Account(firstName, lastName, email, username, hashPassword(password))
-  }
-
-  def main(args: Array[String]): Unit = {
-    val a1 = Account("NICK", "POULOS", "npoulos9825@gmail.com", "npoulos3", "3L3ctr0m4gn3t1$m")
-    println(a1)
+  def generateSalt(n: Int): String = {
+    val allowed = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+    val rand = new Random()
+    def generateSalt(n: Int, saltLetters: List[Char]): List[Char] = {
+      n match {
+        case 0 => saltLetters
+        case _ => generateSalt(n - 1, allowed.charAt(rand.nextInt(36)) :: saltLetters)
+      }
+    }
+    generateSalt(n, List()).mkString
   }
 }
