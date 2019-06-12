@@ -1,1 +1,5 @@
 GET /hello controllers.HomeController.hello
+GET /after controllers.HomeController.before
++ nocsrf
+POST /after controllers.HomeController.after
+#POST /formstuff controllers.HomeController.formstuff
