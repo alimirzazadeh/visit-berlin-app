@@ -3,11 +3,7 @@ package controllers
 import java.security.MessageDigest
 import scala.util.Random
 
-case class Account(email: String, passwordHash: String, salt: String/*profile: Profile*/) {
-
-  def this(email: String, password: String, salt: String, useless: Boolean/*profile: Profile*/) {
-    this(email, Account.hashPassword(password, salt), salt)
-  }
+case class Account(email: String, passwordHash: String, salt: String, profile: Profile, admin: Boolean) {
 
   require(
     email.matches("^([\\w\\d!#$%&'*+-\\/=?^`{|}~]+(\\.?(?=[\\w\\d]))[\\w\\d]*?)+" +
@@ -62,9 +58,5 @@ object Account {
 
   def generateSalt(): String = {
     generateSalt(8)
-  }
-
-  def main(args: Array[String]) = {
-    val a1 = new Account("npoulos9825@gmail.com", "3L3ctr0m4gn3t1$m", Account.generateSalt(), true)
   }
 }
