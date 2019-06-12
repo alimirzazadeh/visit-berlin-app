@@ -71,14 +71,14 @@ class AccountManager {
 
 object AccountManager {
 
-  val filename: String = "accounts.csv"
+  val filename: String = "public/accounts.csv"
 
   def main(args: Array[String]) = {
     val am1 = new AccountManager
-    am1.writeToCSV(am1.addAccount(Account("tscaram@gmail.com","testPass", Account.generateSalt(), Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), true)))
+    am1.writeToCSV(am1.addAccount(Account("tam@gmail.com","testPass", Account.generateSalt(), Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), true)))
   }
-  def addAccount(acc: Account): List[Account] = {
+  def addAccount(acc: Account): Unit = {
     val aml = new AccountManager
-    aml.addAccount(acc)
+    aml.writeToCSV(aml.addAccount(acc))
   }
 }
