@@ -58,20 +58,8 @@ case class U(info: String) extends AccountParameter(info)
 case class P(info: String) extends AccountParameter(info)
 */
 object Account {
+  
   def hashPassword(password: String): Long = {
     MurmurHash3.stringHash(password)
-  }
-
-  def apply(firstName: String, lastName: String, email: String, username: String, passwordHash: Long): Account = {
-    new Account(firstName, lastName, email, username, passwordHash)
-  }
-
-  def apply(firstName: String, lastName: String, email: String, username: String, password: String): Account = {
-    new Account(firstName, lastName, email, username, hashPassword(password))
-  }
-
-  def main(args: Array[String]): Unit = {
-    val a1 = Account("NICK", "POULOS", "npoulos9825@gmail.com", "npoulos3", "3L3ctr0m4gn3t1$m")
-    println(a1)
   }
 }
