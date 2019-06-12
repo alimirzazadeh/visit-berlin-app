@@ -29,4 +29,7 @@ case class Profile(firstName: String, lastName: String, birthYear: Int, hometown
     }
   }
 
+  def toList(): List[String] = {
+    this.firstName :: this.lastName :: this.birthYear.toString() :: this.hometown :: this.interests :: List[String]()
+  }
 }
