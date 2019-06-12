@@ -10,7 +10,9 @@ class AccountManager {
     def createList(accList: List[Account], csvInfo: Iterator[String]): List[Account] = {
       if (csvInfo.hasNext) {
         val info = csvInfo.next().split(",")
-        createList(new Account(info(0), info(1), info(2), true, Profile(info(3), info(4), info(5).toInt, info(6), info(7))) :: accList, csvInfo)
+        var isAdmin = false
+        if (info(3) == "true") isAdmin = true
+        createList(Account(info(0), info(1), info(2), Profile(info(4), info(5), info(6).toInt, info(7), info(8)), isAdmin) :: accList, csvInfo)
       }
       else
         accList
@@ -26,11 +28,11 @@ class AccountManager {
 
   def writeToCSV(accList: List[Account]): Unit = {
     val writer = new PrintWriter(new File(AccountManager.filename))
-    writer.write("email,passwordHash,salt,firstName,lastName,birthYear,hometown,interests\n")
+    writer.write("email,passwordHash,salt,admin,firstName,lastName,birthYear,hometown,interests\n")
     for (account <- accList) {
       val currentAcc = account.makeStringList
       val currentProf = account.profile.toList()
-      for (item <- 0 to 2) writer.write(currentAcc(item) + ",")
+      for (item <- 0 to 3) writer.write(currentAcc(item) + ",")
       for (item <- 0 to 3) writer.write(currentProf(item) + ",")
       writer.write(currentProf(4) + '\n')
     }
@@ -73,6 +75,6 @@ object AccountManager {
 
   def main(args: Array[String]) = {
     val am1 = new AccountManager
-    am1.writeToCSV(am1.addAccount(new Account("tscaram@gmail.com","testPass", Account.generateSalt(), true, Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"))))
+    am1.writeToCSV(am1.addAccount(Account("tscaram@gmail.com","testPass", Account.generateSalt(), Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), true)))
   }
 }
