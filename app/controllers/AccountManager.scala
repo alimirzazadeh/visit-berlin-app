@@ -10,7 +10,7 @@ class AccountManager {
     def createList(accList: List[Account], csvInfo: Iterator[String]): List[Account] = {
       if (csvInfo.hasNext) {
         val info = csvInfo.next().split(",")
-        createList(Account(info(0), info(1), info(2), info(3), info(4)) :: accList, csvInfo)
+        createList(Account(info(0), info(1), new Profile(info(2), info(3))) :: accList, csvInfo)
       }
       else
         accList
@@ -37,8 +37,7 @@ class AccountManager {
 
   def addAccount(acc: Account): List[Account] = {
     val accList = readFromCSV
-    val updatedList = if (accList.contains(acc)) accList else acc :: accList //this doesn't work - duplicates are still added
-    //doesn't work because the string version of password hash is different each time -- look at target/accounts.csv
+    val updatedList = if (accList.contains(acc)) accList else acc :: accList
     updatedList
   }
 
@@ -56,22 +55,18 @@ class AccountManager {
 }
 
 object AccountManager {
+
   val filename: String = "accounts.csv"
-  
-  // Run this main method to manually test Account and AccountManager instances and functions
-  // If readFromCSV is not implemented at time of test, a dummy return must be provided for it
+
   def main(args: Array[String]) = {
     val am1 = new AccountManager
-<<<<<<< Updated upstream
-    am1.writeToCSV(am1.addAccount(Account("TYLER","SCAR","tscaram@gmail.com","tscaram","test2")))
-    am1.writeToCSV(am1.addAccount(Account("TYLER","SCAR","tscaram@gmail.com","tscaram","test2")))
-    am1.writeToCSV(am1.addAccount(Account("TYLER","SCAR","tscaram@gmail.com","tscaram","test2")))
-
-    //am1.writeToCSV(am1.removeAccount(Account("TYLER","SCAR","tscaram@gmail.com","tscaram","test2")))
-    //looks like add, remove, and edit don't work because the string version of the hash is random in the csv
-=======
-    val a1 = Account("NICK", "POULOS", "npoulos9825@gmail.com", "npoulos3", "********************")
+    val a1 = new Account("npoulos9825@gmail.com", "coolPassword!",
+      new Profile("NICK", "POULOS"))
     println(a1.passwordHash)
->>>>>>> Stashed changes
+    println(a1.salt)
+    val a2 = a1.changePassword("veryCoolPassword!!")
+    println(a2.passwordHash)
+    println(a2.salt)
+    println(Account.generateSalt(8))
   }
 }
