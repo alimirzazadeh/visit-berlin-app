@@ -1,15 +1,12 @@
 package controllers
 
 import java.security.MessageDigest
-
 import scala.util.Random
 
-class Account(val email: String, val passwordHash: String, val salt: String) {
+case class Account(val email: String, password: String, val profile: Profile) {
 
-  def this(email: String, username: String, password: String) {
-    val localSalt = generateSalt
-    this(email, Account.hashPassword(password, "hello"), localSalt)
-  }
+  val salt = Account.generateSalt
+  val passwordHash = Account.hashPassword(password, salt)
 
   require(
     email.matches("^([\\w\\d!#$%&'*+-\\/=?^`{|}~]+(\\.?(?=[\\w\\d]))[\\w\\d]*?)+" +
@@ -17,13 +14,12 @@ class Account(val email: String, val passwordHash: String, val salt: String) {
     email.split("@")(0).length() <= 64 &&
     email.split("@")(1).length() <= 255, "Email address is of improper format.")
 
-  def generateSalt: String = {
-    val alloweds = List[Char]()
-    val rand = new Random()
-    val chars = List[Char]
-    for (i <- 0 to 7) {
+  def changeEmail(newEmail: String) = {
+    this.copy(email = newEmail)
+  }
 
-    }
+  def changePassword(newPassword: String) = {
+    this.copy(password = newPassword)
   }
 
   def makeStringList: List[String] = {
@@ -33,32 +29,15 @@ class Account(val email: String, val passwordHash: String, val salt: String) {
   override def equals(other: Any): Boolean = {
     other match {
       case that: Account =>
-        this.firstName == that.firstName &&
-          this.lastName == that.lastName &&
-          this.username == that.username &&
-          this.passwordHash == that.passwordHash
+        this.email == that.email && this.passwordHash == that.passwordHash
       case _ => false
     }
   }
 
   override def toString: String = {
-    s"User $firstName $lastName -- Email: $email, Username: $username, Password Hash: $passwordHash"
+    s"Email: $email, Password Hash: $passwordHash"
   }
 }
-<<<<<<< Updated upstream
-/*
-class AccountParameter(info: String)
-case class F(info: String) extends AccountParameter(info)
-case class L(info: String) extends AccountParameter(info)
-case class U(info: String) extends AccountParameter(info)
-case class P(info: String) extends AccountParameter(info)
-*/
-object Account {
-  
-  def hashPassword(password: String): Long = {
-    MurmurHash3.stringHash(password)
-  }
-=======
 
 object Account {
 
@@ -68,12 +47,13 @@ object Account {
       .map("%02x".format(_)).mkString
   }
 
-//  def apply(firstName: String, lastName: String, email: String, username: String, passwordHash: String): Account = {
-//    new Account(firstName, lastName, email, username, passwordHash)
-//  }
-//
-//  def apply(firstName: String, lastName: String, email: String, username: String, password: String): Account = {
-//    new Account(firstName, lastName, email, username, hashPassword(password, salt))
-//  }
->>>>>>> Stashed changes
+  def generateSalt: String = {
+    val allowed = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+    val rand = new Random()
+    val saltLetters: List[Char] = List()
+    for (i <- 0 to 7) {
+      allowed.charAt(rand.nextInt(36)) :: saltLetters
+    }
+    saltLetters.mkString
+  }
 }
