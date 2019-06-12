@@ -19,7 +19,7 @@ case class Account(email: String, passwordHash: String, salt: String, profile: P
     copy(passwordHash = Account.hashPassword(newPassword, salt))
   }
 
-  def makeStringList: List[String] = {
+  def toList: List[String] = {
     List(s"$email", s"$passwordHash", s"$salt", s"$admin")
   }
 
