@@ -31,7 +31,7 @@ class Account(val firstName: String, val lastName: String, val email: String, va
     Account(firstName, lastName, email, username, newPassword)
   }
 
-  def makeStringList(acc: Account): List[String] = {
+  def makeStringList: List[String] = {
     List(s"$firstName", s"$lastName", s"$email", s"$username", s"$passwordHash.toString()")
   }
 
