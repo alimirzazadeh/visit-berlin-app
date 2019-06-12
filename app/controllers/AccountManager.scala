@@ -39,21 +39,32 @@ class AccountManager {
 
   def addAccount(acc: Account): List[Account] = {
     val accList = readFromCSV
-    val updatedList = if (accList.contains(acc)) accList else acc :: accList
+    val updatedList = if (findAccount(accList, acc)) accList else acc :: accList
     updatedList
   }
 
   def removeAccount(acc: Account): List[Account] = {
     val accList = readFromCSV
-    val updatedList = if (!accList.contains(acc)) accList else accList.filter(_ != acc)
+    val updatedList = if (!findAccount(accList, acc)) accList else accList.filter(_ != acc)
     updatedList
   }
 
   def editAccount(oldAcc: Account, newAcc: Account): List[Account] = {
     val accList = readFromCSV
-    val updatedList = if (!accList.contains(oldAcc)) accList else newAcc :: accList.filter(_ != oldAcc)
+    val updatedList = if (!findAccount(accList, newAcc)) accList else newAcc :: accList.filter(_ != oldAcc)
     updatedList
   }
+
+  def findAccount(accList: List[Account], account: Account): Boolean = {
+    var found = false
+    for (acc <- accList) {
+      if (acc.email == account.email)
+        found = true
+    }
+    found
+  }
+
+
 }
 
 object AccountManager {
