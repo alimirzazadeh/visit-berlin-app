@@ -64,4 +64,8 @@ object AccountManager {
     val am1 = new AccountManager
     am1.writeToCSV(am1.addAccount(new Account("tscaram@gmail.com","testPass", Account.generateSalt(), true, Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"))))
   }
+  def addAccount(acc: Account): List[Account] = {
+    val aml = new AccountManager
+    aml.addAccount(acc)
+  }
 }
