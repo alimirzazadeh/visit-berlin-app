@@ -30,8 +30,8 @@ class AccountManager {
     val writer = new PrintWriter(new File(AccountManager.filename))
     writer.write("email,passwordHash,salt,admin,firstName,lastName,birthYear,hometown,interests\n")
     for (account <- accList) {
-      val currentAcc = account.makeStringList
-      val currentProf = account.profile.toList()
+      val currentAcc = account.toList
+      val currentProf = account.profile.toList
       for (item <- 0 to 3) writer.write(currentAcc(item) + ",")
       for (item <- 0 to 3) writer.write(currentProf(item) + ",")
       writer.write(currentProf(4) + '\n')
