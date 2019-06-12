@@ -1,7 +1,19 @@
+
 @main("Hello") {
     <section id="top">
         <div class="wrapper">
-            <h1> Hello World</h1>
+            <h1> Register</h1>
+            <form action="/after" method=POST>
+                First Name: <br>
+                <input type="text" name="firstname"> <br>
+                Last Name: <br>
+                <input type="text" name="lastname"> <br>
+                    Username: <br>
+                    <input type="text" name="username"> <br>
+                    Email: <br>
+                    <input type="text" name="email"> <br>
+                <input type="submit">
+            </form>
         </div>
     </section>
 }
