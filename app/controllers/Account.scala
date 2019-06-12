@@ -1,13 +1,15 @@
 package controllers
 
-import scala.util.hashing.MurmurHash3
+import java.security.MessageDigest
 
-class Account(val firstName: String, val lastName: String, val email: String, val username: String,
-              val passwordHash: Long) {
+import scala.util.Random
 
-  // Name fields provided will already be trimmed and made uppercase
-  require(s"$firstName $lastName".matches("^([A-Z]+('?[A-Z]*?|( ?|-?)(?=[A-Z])))+$"),
-    "Name may only contain capital letters and singular diacriticals.")
+class Account(val email: String, val passwordHash: String, val salt: String) {
+
+  def this(email: String, username: String, password: String) {
+    val localSalt = generateSalt
+    this(email, Account.hashPassword(password, "hello"), localSalt)
+  }
 
   require(
     email.matches("^([\\w\\d!#$%&'*+-\\/=?^`{|}~]+(\\.?(?=[\\w\\d]))[\\w\\d]*?)+" +
@@ -15,24 +17,17 @@ class Account(val firstName: String, val lastName: String, val email: String, va
     email.split("@")(0).length() <= 64 &&
     email.split("@")(1).length() <= 255, "Email address is of improper format.")
 
-  def changeFirstName(newFirstName: String): Account = {
-    Account(newFirstName, lastName, email, username, passwordHash)
-  }
+  def generateSalt: String = {
+    val alloweds = List[Char]()
+    val rand = new Random()
+    val chars = List[Char]
+    for (i <- 0 to 7) {
 
-  def changeLastName(newLastName: String): Account = {
-    Account(firstName, newLastName, email, username, passwordHash)
-  }
-
-  def changeUsername(newUsername: String): Account = {
-    Account(firstName, lastName, email, newUsername, passwordHash)
-  }
-
-  def changePassword(newPassword: String): Account = {
-    Account(firstName, lastName, email, username, newPassword)
+    }
   }
 
   def makeStringList: List[String] = {
-    List(s"$firstName", s"$lastName", s"$email", s"$username", s"$passwordHash")
+    List(s"$email", s"$passwordHash", s"$salt")
   }
 
   override def equals(other: Any): Boolean = {
@@ -50,6 +45,7 @@ class Account(val firstName: String, val lastName: String, val email: String, va
     s"User $firstName $lastName -- Email: $email, Username: $username, Password Hash: $passwordHash"
   }
 }
+<<<<<<< Updated upstream
 /*
 class AccountParameter(info: String)
 case class F(info: String) extends AccountParameter(info)
@@ -62,4 +58,22 @@ object Account {
   def hashPassword(password: String): Long = {
     MurmurHash3.stringHash(password)
   }
+=======
+
+object Account {
+
+  def hashPassword(password: String, salt: String): String = {
+    MessageDigest.getInstance("SHA-256")
+      .digest(s"$password$salt".getBytes("UTF-8"))
+      .map("%02x".format(_)).mkString
+  }
+
+//  def apply(firstName: String, lastName: String, email: String, username: String, passwordHash: String): Account = {
+//    new Account(firstName, lastName, email, username, passwordHash)
+//  }
+//
+//  def apply(firstName: String, lastName: String, email: String, username: String, password: String): Account = {
+//    new Account(firstName, lastName, email, username, hashPassword(password, salt))
+//  }
+>>>>>>> Stashed changes
 }

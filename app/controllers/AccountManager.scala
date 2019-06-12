@@ -62,11 +62,16 @@ object AccountManager {
   // If readFromCSV is not implemented at time of test, a dummy return must be provided for it
   def main(args: Array[String]) = {
     val am1 = new AccountManager
+<<<<<<< Updated upstream
     am1.writeToCSV(am1.addAccount(Account("TYLER","SCAR","tscaram@gmail.com","tscaram","test2")))
     am1.writeToCSV(am1.addAccount(Account("TYLER","SCAR","tscaram@gmail.com","tscaram","test2")))
     am1.writeToCSV(am1.addAccount(Account("TYLER","SCAR","tscaram@gmail.com","tscaram","test2")))
 
     //am1.writeToCSV(am1.removeAccount(Account("TYLER","SCAR","tscaram@gmail.com","tscaram","test2")))
     //looks like add, remove, and edit don't work because the string version of the hash is random in the csv
+=======
+    val a1 = Account("NICK", "POULOS", "npoulos9825@gmail.com", "npoulos3", "********************")
+    println(a1.passwordHash)
+>>>>>>> Stashed changes
   }
 }
