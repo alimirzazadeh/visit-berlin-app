@@ -5,8 +5,8 @@ import scala.util.Random
 
 case class Account(email: String, private val password: String, profile: Profile) {
 
-  val salt = Account.generateSalt(8)
-  val passwordHash = Account.hashPassword(password, salt)
+  val salt: String = Account.generateSalt(8)
+  val passwordHash: String = Account.hashPassword(password, salt)
 
   require(
     email.matches("^([\\w\\d!#$%&'*+-\\/=?^`{|}~]+(\\.?(?=[\\w\\d]))[\\w\\d]*?)+" +
@@ -14,11 +14,11 @@ case class Account(email: String, private val password: String, profile: Profile
     email.split("@")(0).length() <= 64 &&
     email.split("@")(1).length() <= 255, "Email address is of improper format.")
 
-  def changeEmail(newEmail: String) = {
+  def changeEmail(newEmail: String): Account = {
     copy(email = newEmail)
   }
 
-  def changePassword(newPassword: String) = {
+  def changePassword(newPassword: String): Account = {
     copy(password = newPassword)
   }
 
