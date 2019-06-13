@@ -38,6 +38,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     val newAccount = Account(request.body.asFormUrlEncoded.get("email").head,
       Account.hashPasswordPlusSalt(request.body.asFormUrlEncoded.get("password").head),
       newProfile,
+      // Change this to check user input match to the admin password's salt-free hash
       admin=true)
     val am = new AccountManager
     am.writeToCSV(am.addAccount(newAccount))

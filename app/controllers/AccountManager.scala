@@ -6,6 +6,10 @@ import scala.io.Source
 
 class AccountManager {
 
+  /* We wouldn't normally include this in the source code for security purposes, but this string
+  represents the salt-free cryptographic hash of our admin password, "scalaisthefuture"*/
+  final val adminHash: String = "ab867cba53df0946b0c0bf0084503f8c70ff995fa615ee2f131cacf45c60cb15"
+
   def readFromCSV: List[Account] = {
     def createList(accList: List[Account], csvInfo: Iterator[String]): List[Account] = {
       if (csvInfo.hasNext) {
