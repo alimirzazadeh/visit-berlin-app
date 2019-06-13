@@ -73,7 +73,7 @@ object AccountManager {
 
   val filename: String = "public/accounts.csv"
 
-  def main(args: Array[String]) = {
+  def main(args: Array[String]): Unit = {
     val am1 = new AccountManager
     am1.writeToCSV(am1.addAccount(Account("tam@gmail.com","testPass", Account.generateSalt(), Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), true)))
   }
