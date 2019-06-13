@@ -15,6 +15,9 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   def before = Action {
     Ok(views.html.hello())
   }
+  def beforelogin = Action {
+    Ok(views.html.login(assetsFinder))
+  }
 
   // Home Page
   def index = Action {
@@ -43,6 +46,17 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     val am = new AccountManager
     am.writeToCSV(am.addAccount(newAccount))
     Ok(views.html.after(newAccount))
+  }
+
+  def afterlogin = Action { implicit request =>
+    val email = request.body.asFormUrlEncoded.get("email").head.toUpperCase
+    val password = request.body.asFormUrlEncoded.get("password").head.toUpperCase
+    val am = new AccountManager
+    val accountTest = am.verifyLogin(email, password)
+    accountTest match {
+      case None => Ok(views.html.login(assetsFinder))
+      case Some(userAccount) => Ok(views.html.afterlogin(userAccount))
+    }
   }
 
   val userForm = Form(

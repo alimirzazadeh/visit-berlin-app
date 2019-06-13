@@ -1,1 +1,3 @@
-email,passwordHash,salt,firstName,lastName,birthYear,hometown,interests
+email,passwordHash,salt,admin,firstName,lastName,birthYear,hometown,interests
+asldfkjas@gmail.com,6bd33470b121331d957be41225090bf97310bac50c65d1a22c6bebf4b02a96aa,EV3AMH4D,true,AS,ASD,2000,ASD,sdjfsk
+alimirz@gmail.com,2e823ae3dc946a5fce6c0443fad0f878f8812d51aaa71856800afcf87e52e490,4PCVKQQC,true,ALI,MIRZAZADEH,2000,NO,yes

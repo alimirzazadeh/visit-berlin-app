@@ -1,0 +1,9 @@
+@import models.UserData
+@(profile: Account)
+@main("After") {
+    <section id="top">
+        <div class="wrapper">
+            <h1> Hello again @profile.profile.firstName @profile.profile.lastName</h1>
+        </div>
+    </section>
+}
