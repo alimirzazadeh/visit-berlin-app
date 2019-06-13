@@ -9,12 +9,11 @@ case class Profile(firstName: String, lastName: String, birthYear: Int, hometown
   //birthYear must be between 1900 and 2019, inclusive
   require(birthYear <= 2019 && birthYear > 1900)
 
-  def changeFirstName(newFirstName: String): Profile = new Profile(newFirstName, lastName, birthYear, hometown, interests)
-  def changeLastName(newLastName: String): Profile = new Profile(firstName, newLastName, birthYear, hometown, interests)
-  def changeBirthYear(newBirthYear: Int): Profile = new Profile(firstName, lastName, newBirthYear, hometown, interests)
-  def changeHometown(newHometown: String): Profile = new Profile(firstName, lastName, birthYear, newHometown, interests)
-  def changeInterests(newInterests: String): Profile = new Profile(firstName, lastName, birthYear, hometown, newInterests)
-
+  def changeFirstName(newFirstName: String): Profile = copy(firstName = newFirstName)
+  def changeLastName(newLastName: String): Profile = copy(lastName = newLastName)
+  def changeBirthYear(newBirthYear: Int): Profile = copy(birthYear = newBirthYear)
+  def changeHometown(newHometown: String): Profile = copy(hometown = newHometown)
+  def changeInterests(newInterests: String): Profile = copy(interests = newInterests)
 
   override def equals(that: Any): Boolean = {
     that match {

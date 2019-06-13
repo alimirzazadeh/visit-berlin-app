@@ -30,15 +30,18 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def after = Action { implicit request =>
-    val newprofile = new Profile(request.body.asFormUrlEncoded.get("firstname").head, request.body.asFormUrlEncoded.get("lastname").head,
-      request.body.asFormUrlEncoded.get("birthyear").head.toInt, request.body.asFormUrlEncoded.get("hometown").head,
+    val newProfile = Profile(request.body.asFormUrlEncoded.get("firstname").head.toUpperCase,
+      request.body.asFormUrlEncoded.get("lastname").head.toUpperCase,
+      request.body.asFormUrlEncoded.get("birthyear").head.toInt,
+      request.body.asFormUrlEncoded.get("hometown").head.toUpperCase,
       request.body.asFormUrlEncoded.get("interests").head)
-    val newaccount = new Account(request.body.asFormUrlEncoded.get("email").head, request.body.asFormUrlEncoded.get("password").head, "idk", newprofile, false)
-    //AccountManager.addAccount(newaccount);
+    val newAccount = Account(request.body.asFormUrlEncoded.get("email").head,
+      Account.hashPasswordPlusSalt(request.body.asFormUrlEncoded.get("password").head),
+      newProfile,
+      admin=true)
     val am = new AccountManager
-    am.writeToCSV(am.addAccount(newaccount))
-    //
-    Ok(views.html.after(newaccount))
+    am.writeToCSV(am.addAccount(newAccount))
+    Ok(views.html.after(newAccount))
   }
 
   val userForm = Form(
@@ -52,7 +55,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       "birthyear" -> number
     )(UserData.apply)(UserData.unapply)
   )
-//  def formstuff = Action {
+//  def formStuff = Action {
 //    Ok(views.html.)
 //  }
 }

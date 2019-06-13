@@ -10,9 +10,9 @@ class AccountManager {
     def createList(accList: List[Account], csvInfo: Iterator[String]): List[Account] = {
       if (csvInfo.hasNext) {
         val info = csvInfo.next().split(",")
-        var isAdmin = false
-        if (info(3) == "true") isAdmin = true
-        createList(Account(info(0), info(1), info(2), Profile(info(4), info(5), info(6).toInt, info(7), info(8)), isAdmin) :: accList, csvInfo)
+        val isAdmin = info(3) == "true"
+        createList(Account(info(0), (info(1), info(2)),
+          Profile(info(4), info(5), info(6).toInt, info(7), info(8)), isAdmin) :: accList, csvInfo)
       }
       else
         accList
@@ -53,32 +53,41 @@ class AccountManager {
 
   def editAccount(oldAcc: Account, newAcc: Account): List[Account] = {
     val accList = readFromCSV
-    val updatedList = if (!findAccount(accList, newAcc)) accList else newAcc :: accList.filter(_ != oldAcc)
+    val updatedList = if (!findAccount(accList, oldAcc)) accList else newAcc :: accList.filter(_ != oldAcc)
     updatedList
   }
 
   def findAccount(accList: List[Account], account: Account): Boolean = {
-    var found = false
-    for (acc <- accList) {
-      if (acc.email == account.email)
-        found = true
-    }
-    found
+    accList.exists(_.email == account.email)
   }
 
-
+  def verifyLogin(email: String, password: String): Option[Account] = {
+    val accList = readFromCSV
+    val matchList = accList.filter(_.email == email)
+    if (matchList.isEmpty) None else {
+      val checkAccount = matchList.head
+      if (Account.hashPassword(password, checkAccount.saltedHash._2) != checkAccount.saltedHash._1) None else
+        Some(checkAccount)
+    }
+  }
 }
 
 object AccountManager {
 
   val filename: String = "public/accounts.csv"
 
-  def main(args: Array[String]) = {
-    val am1 = new AccountManager
-    am1.writeToCSV(am1.addAccount(Account("tam@gmail.com","testPass", Account.generateSalt(), Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), true)))
+  def main(args: Array[String]): Unit = {
+    val am = new AccountManager
+    am.writeToCSV(am.addAccount(Account("tam@gmail.com", Account.hashPasswordPlusSalt("testPassword"),
+      Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), admin=true)))
+    am.writeToCSV(am.addAccount(Account("npoulos69@hotmail.gov", Account.hashPasswordPlusSalt("testPassword"),
+      Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), admin=true)))
+    am.writeToCSV(am.addAccount(Account("tam@gmail.com", Account.hashPasswordPlusSalt("testPassword"),
+      Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), admin=true)))
+    println(am.verifyLogin("tam@gmail.com", "testPassword").isDefined)
   }
-  def addAccount(acc: Account): Unit = {
-    val aml = new AccountManager
-    aml.writeToCSV(aml.addAccount(acc))
-  }
+//  def addAccount(acc: Account): Unit = {
+//    val aml = new AccountManager
+//    aml.writeToCSV(aml.addAccount(acc))
+//  }
 }
