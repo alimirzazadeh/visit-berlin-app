@@ -73,10 +73,10 @@ object AccountManager {
 
   def main(args: Array[String]): Unit = {
     val am1 = new AccountManager
-    am1.writeToCSV(am1.addAccount(Account("tam@gmail.com","testPass", Account.generateSalt(), Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), true)))
+    am1.writeToCSV(am1.addAccount(Account("tam@gmail.com","testPassHash", Account.generateSalt(), Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), admin=true)))
   }
-  def addAccount(acc: Account): Unit = {
-    val aml = new AccountManager
-    aml.writeToCSV(aml.addAccount(acc))
-  }
+//  def addAccount(acc: Account): Unit = {
+//    val aml = new AccountManager
+//    aml.writeToCSV(aml.addAccount(acc))
+//  }
 }
