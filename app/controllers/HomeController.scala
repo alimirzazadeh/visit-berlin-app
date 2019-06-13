@@ -30,9 +30,9 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def after = Action { implicit request =>
-    val newProfile = Profile(request.body.asFormUrlEncoded.get("firstName").head.toUpperCase,
-      request.body.asFormUrlEncoded.get("lastName").head.toUpperCase,
-      request.body.asFormUrlEncoded.get("birthYear").head.toInt,
+    val newProfile = Profile(request.body.asFormUrlEncoded.get("firstname").head.toUpperCase,
+      request.body.asFormUrlEncoded.get("lastname").head.toUpperCase,
+      request.body.asFormUrlEncoded.get("birthyear").head.toInt,
       request.body.asFormUrlEncoded.get("hometown").head.toUpperCase,
       request.body.asFormUrlEncoded.get("interests").head)
     val newAccount = Account(request.body.asFormUrlEncoded.get("email").head,
@@ -46,13 +46,13 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
 
   val userForm = Form(
     mapping(
-      "firstName" -> text,
-      "lastName"  -> text,
+      "firstname" -> text,
+      "lastname"  -> text,
       "email" -> text,
       "hometown" -> text,
       "interests" -> text,
       "password" -> text,
-      "birthYear" -> number
+      "birthyear" -> number
     )(UserData.apply)(UserData.unapply)
   )
 //  def formStuff = Action {

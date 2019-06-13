@@ -52,17 +52,22 @@ class AccountManager {
 
   def editAccount(oldAcc: Account, newAcc: Account): List[Account] = {
     val accList = readFromCSV
-    val updatedList = if (!findAccount(accList, newAcc)) accList else newAcc :: accList.filter(_ != oldAcc)
+    val updatedList = if (!findAccount(accList, oldAcc)) accList else newAcc :: accList.filter(_ != oldAcc)
     updatedList
   }
 
   def findAccount(accList: List[Account], account: Account): Boolean = {
-    var found = false
-    for (acc <- accList) {
-      if (acc.email == account.email)
-        found = true
+    accList.exists(_.email == account.email)
+  }
+
+  def verifyLogin(email: String, password: String): Option[Account] = {
+    val accList = readFromCSV
+    val matchList = accList.filter(_.email == email)
+    if (matchList.isEmpty) None else {
+      val checkAccount = matchList.head
+      if (Account.hashPassword(password, checkAccount.saltedHash._2) != checkAccount.saltedHash._1) None else
+        Some(checkAccount)
     }
-    found
   }
 }
 
@@ -72,9 +77,13 @@ object AccountManager {
 
   def main(args: Array[String]): Unit = {
     val am = new AccountManager
-    am.writeToCSV(am.addAccount(Account("tam@gmail.com", Account.hashPasswordPlusSalt("testPassword"), Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), admin=true)))
-    am.writeToCSV(am.addAccount(Account("npoulos69@hotmail.gov", Account.hashPasswordPlusSalt("testPassword"), Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), admin=true)))
-
+    am.writeToCSV(am.addAccount(Account("tam@gmail.com", Account.hashPasswordPlusSalt("testPassword"),
+      Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), admin=true)))
+    am.writeToCSV(am.addAccount(Account("npoulos69@hotmail.gov", Account.hashPasswordPlusSalt("testPassword"),
+      Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), admin=true)))
+    am.writeToCSV(am.addAccount(Account("tam@gmail.com", Account.hashPasswordPlusSalt("testPassword"),
+      Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), admin=true)))
+    println(am.verifyLogin("tam@gmail.com", "testPassword").isDefined)
   }
 //  def addAccount(acc: Account): Unit = {
 //    val aml = new AccountManager
