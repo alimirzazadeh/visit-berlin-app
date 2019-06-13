@@ -6,7 +6,6 @@ import play.api.data._
 import play.api.data.Forms._
 import models.UserData
 
-
 class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: AssetsFinder) extends AbstractController(cc) {
 
   def hello = Action {
@@ -31,16 +30,23 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def after = Action { implicit request =>
-    print("HIIII")
-    Ok(views.html.after(request.body.asFormUrlEncoded.get("firstname").head))
+    val newprofile = new Profile(request.body.asFormUrlEncoded.get("firstname").head, request.body.asFormUrlEncoded.get("lastname").head,
+      request.body.asFormUrlEncoded.get("birthyear").head.toInt, request.body.asFormUrlEncoded.get("hometown").head,
+      request.body.asFormUrlEncoded.get("interests").head)
+    val newaccount = new Account(request.body.asFormUrlEncoded.get("email").head, request.body.asFormUrlEncoded.get("password").head, "idk", newprofile)
+    AccountManager.addAccount(newaccount);
+    Ok(views.html.after(newaccount))
   }
 
   val userForm = Form(
     mapping(
       "firstname" -> text,
       "lastname"  -> text,
-      "username" -> text,
-      "email" -> text
+      "email" -> text,
+      "hometown" -> text,
+      "interests" -> text,
+      "password" -> text,
+      "birthyear" -> number
     )(UserData.apply)(UserData.unapply)
   )
 //  def formstuff = Action {
