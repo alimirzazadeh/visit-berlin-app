@@ -25,14 +25,13 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def after = Action { implicit request =>
-    val newProfile = Profile(request.body.asFormUrlEncoded.get("firstName").head, request.body.asFormUrlEncoded.get("lastName").head,
-      request.body.asFormUrlEncoded.get("birthYear").head.toInt, request.body.asFormUrlEncoded.get("hometown").head,
+    val newProfile = Profile(request.body.asFormUrlEncoded.get("firstName").head.toUpperCase, request.body.asFormUrlEncoded.get("lastName").head.toUpperCase,
+      request.body.asFormUrlEncoded.get("birthYear").head.toInt, request.body.asFormUrlEncoded.get("hometown").head.toUpperCase,
       request.body.asFormUrlEncoded.get("interests").head)
-    val newAccount = new Account(request.body.asFormUrlEncoded.get("email").head, request.body.asFormUrlEncoded.get("password").head, Account.generateSalt(), newProfile, false)
-    //AccountManager.addAccount(newaccount);
+    val newSalt = Account.generateSalt()
+    val newAccount = new Account(request.body.asFormUrlEncoded.get("email").head, Account.hashPassword(request.body.asFormUrlEncoded.get("password").head, newSalt), newSalt, newProfile, false)
     val am = new AccountManager
     am.writeToCSV(am.addAccount(newAccount))
-    //
     Ok(views.html.after(newAccount))
   }
 
