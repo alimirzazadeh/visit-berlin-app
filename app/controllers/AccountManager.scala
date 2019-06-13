@@ -11,7 +11,8 @@ class AccountManager {
       if (csvInfo.hasNext) {
         val info = csvInfo.next().split(",")
         val isAdmin = info(3) == "true"
-        createList(Account(info(0), (info(1), info(2)), Profile(info(4), info(5), info(6).toInt, info(7), info(8)), isAdmin) :: accList, csvInfo)
+        createList(Account(info(0), (info(1), info(2)),
+          Profile(info(4), info(5), info(6).toInt, info(7), info(8)), isAdmin) :: accList, csvInfo)
       }
       else
         accList
