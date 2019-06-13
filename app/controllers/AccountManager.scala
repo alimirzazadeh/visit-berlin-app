@@ -65,8 +65,6 @@ class AccountManager {
     }
     found
   }
-
-
 }
 
 object AccountManager {
