@@ -49,8 +49,8 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def afterlogin = Action { implicit request =>
-    val email = request.body.asFormUrlEncoded.get("email").head.toUpperCase
-    val password = request.body.asFormUrlEncoded.get("password").head.toUpperCase
+    val email = request.body.asFormUrlEncoded.get("email").head
+    val password = request.body.asFormUrlEncoded.get("password").head
     val am = new AccountManager
     val accountTest = am.verifyLogin(email, password)
     accountTest match {
