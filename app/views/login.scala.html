@@ -1,4 +1,4 @@
-@(assetsFinder: AssetsFinder)
+@(tried: String)
 @main("Berlin Travel Guide") {
     <section id="loginbox text-center justify-content-center">
         <div class="limiter">
@@ -10,11 +10,11 @@
                         </span>
 
                         <span class="login100-form-title mt-4 p-b-34 p-t-27">
-                            Login
+                            Login @tried
                         </span>
 
                         <div class="wrap-input100 validate-input" data-validate = "Enter Email">
-                            <input class="input100" type="text" name="email" placeholder="Enter Email">
+                            <input class="input100" type="email" name="email" placeholder="Enter Email">
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
 

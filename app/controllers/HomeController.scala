@@ -16,7 +16,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.hello())
   }
   def beforelogin = Action {
-    Ok(views.html.login(assetsFinder))
+    Ok(views.html.login(null))
   }
 
   // Home Page
@@ -29,7 +29,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def login = Action {
-    Ok(views.html.login(assetsFinder))
+    Ok(views.html.login(null))
   }
 
   def after = Action { implicit request =>
@@ -54,7 +54,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     val am = new AccountManager
     val accountTest = am.verifyLogin(email, password)
     accountTest match {
-      case None => Ok(views.html.login(assetsFinder))
+      case None => Ok(views.html.login("INCORRECT PASSWORD"))
       case Some(userAccount) => Ok(views.html.afterlogin(userAccount))
     }
   }
