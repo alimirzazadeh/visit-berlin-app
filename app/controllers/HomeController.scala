@@ -36,6 +36,10 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.login(null))
   }
 
+  def logout = Action {
+    Ok(views.html.index(null))
+  }
+
   def place = Action {
     Ok(views.html.placepage("Account", assetsFinder))
   }
