@@ -71,13 +71,12 @@ case class Profile(firstName: String, lastName: String, birthYear: Int, hometown
     */
   override def equals(other: Any): Boolean = {
     other match {
-      case that: Profile => {
+      case that: Profile =>
         this.firstName == that.firstName &&
-          this.lastName == that.lastName &&
-          this.birthYear == that.birthYear &&
-          this.hometown == that.hometown &&
-          this.interests == that.interests
-      }
+        this.lastName == that.lastName &&
+        this.birthYear == that.birthYear &&
+        this.hometown == that.hometown &&
+        this.interests == that.interests
       case _ => false
     }
   }
