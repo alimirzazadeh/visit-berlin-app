@@ -21,7 +21,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
 
   // Home Page
   def index = Action {
-    Ok(views.html.index(null))
+    Ok(views.html.index("", "Account"))
   }
 
   def manageAccount = Action {
@@ -37,7 +37,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def logout = Action {
-    Ok(views.html.index(null))
+    Ok(views.html.index(null, "Account"))
   }
 
   def place = Action {
@@ -57,7 +57,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       admin=true)
     val am = new AccountManager
     am.writeToCSV(am.addAccount(newAccount))
-    Ok(views.html.index(newAccount.profile.firstName + " " + newAccount.profile.lastName))
+    Ok(views.html.index(newAccount.profile.firstName + " " + newAccount.profile.lastName, "Account"))
   }
 
   def afterlogin = Action { implicit request =>
@@ -67,7 +67,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     val accountTest = am.verifyLogin(email, password)
     accountTest match {
       case None => Ok(views.html.login("INCORRECT PASSWORD"))
-      case Some(userAccount) => Ok(views.html.index(userAccount.profile.firstName + " " + userAccount.profile.lastName))
+      case Some(userAccount) => Ok(views.html.index(userAccount.profile.firstName + " " + userAccount.profile.lastName, "Account"))
     }
   }
 
