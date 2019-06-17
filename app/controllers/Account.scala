@@ -34,7 +34,7 @@ case class Account(email: String, saltedHash: (String, String), profile: Profile
 object Account {
 
   def hashPasswordPlusSalt(password: String): (String, String) = {
-    val localSalt = generateSalt()
+    val localSalt = generateSalt
     (hashPassword(password, localSalt), localSalt)
   }
 
@@ -56,5 +56,5 @@ object Account {
     generateSalt(n, List()).mkString
   }
 
-  def generateSalt(): String = generateSalt(8)
+  def generateSalt: String = generateSalt(8)
 }
