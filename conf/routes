@@ -10,5 +10,3 @@ POST /afterlogin controllers.HomeController.afterlogin
 GET /afterlogin controllers.HomeController.beforelogin
 + nocsrf
 POST /after controllers.HomeController.after
-#POST /formstuff controllers.HomeController.formstuff
-
