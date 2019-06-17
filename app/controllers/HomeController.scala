@@ -32,6 +32,10 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.login(null))
   }
 
+  def place = Action {
+    Ok(views.html.placepage("Account", assetsFinder))
+  }
+
   def after = Action { implicit request =>
     val newProfile = Profile(request.body.asFormUrlEncoded.get("firstname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("lastname").head.toUpperCase,

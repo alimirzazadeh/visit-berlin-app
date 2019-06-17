@@ -4,6 +4,7 @@ GET /register controllers.HomeController.register
 GET /login controllers.HomeController.login
 GET /home controllers.HomeController.index
 GET  /assets/*file   controllers.Assets.versioned(path="/public", file)
+GET /place controllers.HomeController.place
 GET /after controllers.HomeController.before
 + nocsrf
 POST /afterlogin controllers.HomeController.afterlogin
