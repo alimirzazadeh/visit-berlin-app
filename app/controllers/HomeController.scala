@@ -15,6 +15,9 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   def before = Action {
     Ok(views.html.hello())
   }
+  def beforelogin = Action {
+    Ok(views.html.login(null))
+  }
 
   // Home Page
   def index = Action {
@@ -26,7 +29,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def login = Action {
-    Ok(views.html.login(assetsFinder))
+    Ok(views.html.login(null))
   }
 
   def after = Action { implicit request =>
@@ -38,10 +41,22 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     val newAccount = Account(request.body.asFormUrlEncoded.get("email").head,
       Account.hashPasswordPlusSalt(request.body.asFormUrlEncoded.get("password").head),
       newProfile,
+      // Change this to check user input match to the admin password's salt-free hash
       admin=true)
     val am = new AccountManager
     am.writeToCSV(am.addAccount(newAccount))
     Ok(views.html.after(newAccount))
+  }
+
+  def afterlogin = Action { implicit request =>
+    val email = request.body.asFormUrlEncoded.get("email").head
+    val password = request.body.asFormUrlEncoded.get("password").head
+    val am = new AccountManager
+    val accountTest = am.verifyLogin(email, password)
+    accountTest match {
+      case None => Ok(views.html.login("INCORRECT PASSWORD"))
+      case Some(userAccount) => Ok(views.html.afterlogin(userAccount))
+    }
   }
 
   val userForm = Form(

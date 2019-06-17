@@ -6,6 +6,9 @@ GET /home controllers.HomeController.index
 GET  /assets/*file   controllers.Assets.versioned(path="/public", file)
 GET /after controllers.HomeController.before
 + nocsrf
+POST /afterlogin controllers.HomeController.afterlogin
+GET /afterlogin controllers.HomeController.beforelogin
++ nocsrf
 POST /after controllers.HomeController.after
 #POST /formstuff controllers.HomeController.formstuff
 
