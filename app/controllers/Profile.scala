@@ -22,17 +22,58 @@ case class Profile(firstName: String, lastName: String, birthYear: Int, hometown
     */
   require(birthYear <= 2019 && birthYear > 1900)
 
+  /**
+    * Submits a new user profile containing the provided new first name
+    *
+    * @param newFirstName new first name String provided by the user during editing
+    * @return the updated profile
+    */
   def changeFirstName(newFirstName: String): Profile = copy(firstName = newFirstName)
+
+  /**
+    * Submits a new user profile containing the provided new last name
+    *
+    * @param newLastName new last name String provided by the user during editing
+    * @return the updated profile
+    */
   def changeLastName(newLastName: String): Profile = copy(lastName = newLastName)
+
+  /**
+    * Submits a new user profile containing the provided new birth year
+    *
+    * @param newBirthYear new birth year Int provided by the user during editing
+    * @return the updated profile
+    */
   def changeBirthYear(newBirthYear: Int): Profile = copy(birthYear = newBirthYear)
+
+  /**
+    * Submits a new user profile containing the provided new hometown
+    *
+    * @param newHometown new hometown String provided by the user during editing
+    * @return the updated profile
+    */
   def changeHometown(newHometown: String): Profile = copy(hometown = newHometown)
+
+  /**
+    * Submits a new user profile containing the provided new interests information
+    *
+    * @param newInterests new interests String provided by the user during editing
+    * @return the updated profile
+    */
   def changeInterests(newInterests: String): Profile = copy(interests = newInterests)
 
-  override def equals(that: Any): Boolean = {
-    that match {
+  /**
+    * Overrides generic equals method to check the equality of two profiles by the equality
+    * of all their fields - first name, last name, birth year, hometown, and interests
+    *
+    * @param other the Object being checked for equality to this one
+    * @return true if the profiles have all the same fields, and false otherwise
+    */
+  override def equals(other: Any): Boolean = {
+    other match {
       case that: Profile => {
         this.firstName == that.firstName &&
-          this.lastName == that.lastName  &&
+          this.lastName == that.lastName &&
           this.birthYear == that.birthYear &&
           this.hometown == that.hometown &&
           this.interests == that.interests
@@ -41,7 +82,12 @@ case class Profile(firstName: String, lastName: String, birthYear: Int, hometown
     }
   }
 
+  /**
+    * Submits a list of Strings containing the profile first and last name,
+    * birth year, hometown, and interests
+    * @return the profile data transformed to a String list
+    */
   def toList: List[String] = {
-    this.firstName :: this.lastName :: this.birthYear.toString() :: this.hometown :: this.interests :: List[String]()
+    List(s"$firstName", s"$lastName", s"${birthYear.toString}", s"$hometown", s"$interests")
   }
 }
