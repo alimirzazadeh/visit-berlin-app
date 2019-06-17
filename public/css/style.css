@@ -13,6 +13,12 @@ body {
   background: #000;
   color: #fff; }
 
+.adminpass {
+  -webkit-transition: .3s all ease;
+  -o-transition: .3s all ease;
+  transition: .3s all ease;
+}
+
 a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
@@ -1290,3 +1296,6 @@ a {
     color: white;
   }
 
+  .container-login100 {
+    background-attachment: fixed;
+  }
