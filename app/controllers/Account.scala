@@ -4,9 +4,9 @@ import java.security.MessageDigest
 import scala.util.Random
 
 /**
-  * Class containing all data for users accounts as well as the functions to cryptographically
-  * secure user passwords.
-  * @param email user's email inputted at registration, must match proper email format
+  * Class containing all data for a user's accounts as well as the functions to cryptographically
+  * secure user passwords and edit existing data.
+  * @param email user's email String inputted at registration, must match proper email format
   * @param saltedHash String tuple containing a randomly generated salt string and the resultant
   *                   hash from performing SHA-256 on the user's inputted password plus the salt
   * @param profile instance of a profile class containing all personal data inputted at registration

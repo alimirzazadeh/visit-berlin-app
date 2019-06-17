@@ -1,12 +1,25 @@
 package controllers
 
+/**
+  * Class containing all data for a user's profile and the functions to edit existing data
+  * @param firstName user's first name String inputted at registration and made uppercase
+  * @param lastName user's last name String inputted at registration and made uppercase
+  * @param birthYear user's birth year Int inputted at registration
+  * @param hometown user's hometown String inputted at registration
+  * @param interests user's interests represented in a String inputted at registration
+  */
 case class Profile(firstName: String, lastName: String, birthYear: Int, hometown: String, interests: String) {
 
-  // Name fields provided will already be trimmed and made uppercase
+  /**
+    * Performs a regex operation to ensure the name Strings are uppercase and match
+    * conventional format for real human names
+    */
   require(s"$firstName $lastName".matches("^([A-Z]+('?[A-Z]*?|( ?|-?)(?=[A-Z])))+$"),
     "Name may only contain capital letters and singular diacriticals.")
 
-  //birthYear must be between 1900 and 2019, inclusive
+  /**
+    * Birth year must be between 1900 and 2019, inclusive
+    */
   require(birthYear <= 2019 && birthYear > 1900)
 
   def changeFirstName(newFirstName: String): Profile = copy(firstName = newFirstName)
