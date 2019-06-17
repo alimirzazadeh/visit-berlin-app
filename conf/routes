@@ -2,13 +2,13 @@ GET / controllers.HomeController.index
 GET /hello controllers.HomeController.hello
 GET /register controllers.HomeController.register
 GET /login controllers.HomeController.login
+GET /logout controllers.HomeController.logout
 GET /home controllers.HomeController.index
 GET  /assets/*file   controllers.Assets.versioned(path="/public", file)
+GET /place controllers.HomeController.place
 GET /after controllers.HomeController.before
 + nocsrf
 POST /afterlogin controllers.HomeController.afterlogin
 GET /afterlogin controllers.HomeController.beforelogin
 + nocsrf
 POST /after controllers.HomeController.after
-#POST /formstuff controllers.HomeController.formstuff
-
