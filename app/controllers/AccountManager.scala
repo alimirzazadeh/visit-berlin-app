@@ -15,8 +15,8 @@ class AccountManager {
    */
   def readFromCSV: List[Account] = {
     /**
-      * Takes a line from a csv file string iterator and converts it into an account object, which is then
-      * added to a list and returned
+      * Takes a line from a csv file string iterator and converts it into an account object, which
+      * is then added to a list and returned
       * @param accList current list of account objects
       * @param csvInfo the iterator for the csv file
       * @return an updated list of accounts after one iteration from the iterator
@@ -62,9 +62,11 @@ class AccountManager {
   }
 
   /**
-    * Gives a new list of account objects, which is updated with a new account if that account does not exist
+    * Gives a new list of account objects, which is updated with a new account if that account
+    * does not yet exist within the file
     * @param acc a new account object to be added to the list
-    * @return the original list of accounts if the account already exists, otherwise a new list including the new account
+    * @return the original list of accounts if the account already exists, otherwise a new list
+    *         including the new account
     */
   def addAccount(acc: Account): List[Account] = {
     val accList = readFromCSV
@@ -75,7 +77,8 @@ class AccountManager {
   /**
     * Filters an account object out of a list of accounts if the account exists
     * @param acc account to be deleted
-    * @return a list of accounts without the account passed as a parameter. If the account doesn't exist, return the original list
+    * @return a list of accounts without the account passed as a parameter. If the account
+    *         doesn't exist, return the original list
     */
   def removeAccount(acc: Account): List[Account] = {
     val accList = readFromCSV
@@ -84,8 +87,8 @@ class AccountManager {
   }
 
   /**
-    * Filters an old account object out of a list of accounts and then adds a new account instead, allowing users to
-    * change data in their account and still maintain their account in the csv file
+    * Filters an old account object out of a list of accounts and then adds a new account instead,
+    * allowing users to change data in their account and still maintain their account in the csv file
     * @param oldAcc the original account
     * @param newAcc the account to be added to the account list
     * @return an updated list of accounts after removing oldAcc and adding newAcc
@@ -107,11 +110,11 @@ class AccountManager {
   }
 
   /**
-    * Using an email and a password, find if the account exists, find if the password is correct, and return the
-    * matching account object from the csv file if the email and password matches the account
+    * Using an email and a password, find if the account exists, find if the password is correct,
+    * and return the matching account object from the csv file if the email and password matches the account
     * @param email the email of the account the user is attempting to log into
     * @param password the password given by the user that will be checked against the account
-    * @return an option that either contains the account if credentials match or None if credentials don't match
+    * @return an option that either contains the account if credentials match or None otherwise
     */
   def verifyLogin(email: String, password: String): Option[Account] = {
     val accList = readFromCSV
@@ -125,9 +128,10 @@ class AccountManager {
 }
 
 /**
-  * AccountManager singleton object which has a static filename variable that can be used in methods within the class
-  * Also contains a main method which is used to test different methods on a smaller scale and can be easily run
-  * within IntelliJ
+  * Companion object for AccountManager which has a filename variable representing a csv file
+  * containing all current user accounts that can be used in methods within the class.
+  * Also contains a main method which is used to test different methods on a smaller scale and
+  * can be easily run within IntelliJ
   */
 object AccountManager {
 
@@ -137,8 +141,5 @@ object AccountManager {
     val am = new AccountManager
     val a1 = Account("tam@gmail.com", Account.hashPasswordPlusSalt("testPassword"),
       Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), admin=true)
-    val a2 = a1.changeEmail("tyfjdsakl@gjfklds.com")
-    // am.writeToCSV(am.addAccount(a1))
-    am.writeToCSV(am.editAccount(a1, a2))
   }
 }
