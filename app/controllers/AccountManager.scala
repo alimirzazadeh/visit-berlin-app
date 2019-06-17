@@ -51,13 +51,13 @@ class AccountManager {
 
   def removeAccount(acc: Account): List[Account] = {
     val accList = readFromCSV
-    val updatedList = if (!findAccount(accList, acc)) accList else accList.filter(_ != acc)
+    val updatedList = if (!findAccount(accList, acc)) accList else accList.filter(_.email != acc.email)
     updatedList
   }
 
   def editAccount(oldAcc: Account, newAcc: Account): List[Account] = {
     val accList = readFromCSV
-    val updatedList = if (!findAccount(accList, oldAcc)) accList else newAcc :: accList.filter(_ != oldAcc)
+    val updatedList = if (!findAccount(accList, oldAcc)) accList else newAcc :: accList.filter(_.email != oldAcc.email)
     updatedList
   }
 
@@ -82,16 +82,10 @@ object AccountManager {
 
   def main(args: Array[String]): Unit = {
     val am = new AccountManager
-    am.writeToCSV(am.addAccount(Account("tam@gmail.com", Account.hashPasswordPlusSalt("testPassword"),
-      Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), admin=true)))
-    am.writeToCSV(am.addAccount(Account("npoulos69@hotmail.gov", Account.hashPasswordPlusSalt("testPassword"),
-      Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), admin=true)))
-    am.writeToCSV(am.addAccount(Account("tam@gmail.com", Account.hashPasswordPlusSalt("testPassword"),
-      Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), admin=true)))
-    println(am.verifyLogin("tam@gmail.com", "testPassword").isDefined)
+    val a1 = Account("tam@gmail.com", Account.hashPasswordPlusSalt("testPassword"),
+      Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), admin=true)
+    val a2 = a1.changeEmail("tyfjdsakl@gjfklds.com")
+    // am.writeToCSV(am.addAccount(a1))
+    am.writeToCSV(am.editAccount(a1, a2))
   }
-//  def addAccount(acc: Account): Unit = {
-//    val aml = new AccountManager
-//    aml.writeToCSV(aml.addAccount(acc))
-//  }
 }
