@@ -6,7 +6,8 @@ import play.api.data._
 import play.api.data.Forms._
 import models.UserData
 
-class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: AssetsFinder) extends AbstractController(cc) {
+class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: AssetsFinder)
+  extends AbstractController(cc) {
 
   def hello = Action {
     Ok(views.html.hello())
@@ -45,6 +46,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def after = Action { implicit request =>
+    val am = new AccountManager
     val newProfile = Profile(request.body.asFormUrlEncoded.get("firstname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("lastname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("birthyear").head.toInt,
@@ -52,10 +54,8 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       request.body.asFormUrlEncoded.get("interests").head)
     val newAccount = Account(request.body.asFormUrlEncoded.get("email").head,
       Account.hashPasswordPlusSalt(request.body.asFormUrlEncoded.get("password").head),
-      newProfile,
-      // Change this to check user input match to the admin password's salt-free hash
-      admin=true)
-    val am = new AccountManager
+      newProfile, Account.hashPassword(
+        request.body.asFormUrlEncoded.get("adminpassword").head, "") ==  AccountManager.adminHash)
     am.writeToCSV(am.addAccount(newAccount))
     Ok(views.html.index(newAccount.profile.firstName + " " + newAccount.profile.lastName))
   }

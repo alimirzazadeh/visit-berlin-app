@@ -6,10 +6,6 @@ import scala.io.Source
 
 class AccountManager {
 
-  /* We wouldn't normally include this in the source code for security purposes, but this string
-  represents the salt-free cryptographic hash of our admin password, "scalaisthefuture"*/
-  final val adminHash: String = "ab867cba53df0946b0c0bf0084503f8c70ff995fa615ee2f131cacf45c60cb15"
-
   /** Uses tail recursion to read a CSV file with all of the information of the accounts
     * @return a list of accounts that can be easily used by other functions
    */
@@ -135,8 +131,21 @@ class AccountManager {
   */
 object AccountManager {
 
+  /**
+    *  We wouldn't normally include this in the source code for security purposes, but this string
+    *  represents the salt-free cryptographic hash of our admin password, "scalaisthefuture"
+    */
+  final val adminHash: String = "ab867cba53df0946b0c0bf0084503f8c70ff995fa615ee2f131cacf45c60cb15"
+
+  /**
+    * String location representing where our persistent file containing all user accounts resides
+    */
   val filename: String = "public/accounts.csv"
 
+  /**
+    * Main method for running tests on accounts and account manager
+    * @param args argument Strings potentially provided to name
+    */
   def main(args: Array[String]): Unit = {
     val am = new AccountManager
     val a1 = Account("tam@gmail.com", Account.hashPasswordPlusSalt("testPassword"),
