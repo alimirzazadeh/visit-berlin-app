@@ -22,8 +22,13 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
 
   // Home Page
   def index = Action {
-    Ok(views.html.index(null))
+    if (HomeController.logaccount.email == "example@example.com") {
+      Ok(views.html.index(null))
+    } else {
+      Ok(views.html.index(HomeController.logaccount))
+    }
   }
+
 
   def manageAccount = Action {
     if (HomeController.logaccount.email != "example@example.com") {
@@ -34,7 +39,11 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def register = Action {
-    Ok(views.html.register(assetsFinder))
+    if (HomeController.logaccount.email == "example@example.com") {
+      Ok(views.html.register(assetsFinder))
+    } else {
+      Ok(views.html.index(HomeController.logaccount));
+    }
   }
 
   def login = Action {
