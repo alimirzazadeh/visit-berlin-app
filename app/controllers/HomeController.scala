@@ -6,7 +6,8 @@ import play.api.data._
 import play.api.data.Forms._
 import models.UserData
 
-class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: AssetsFinder) extends AbstractController(cc) {
+class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: AssetsFinder)
+  extends AbstractController(cc) {
 
   def hello = Action {
     Ok(views.html.hello())
@@ -21,8 +22,13 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
 
   // Home Page
   def index = Action {
-    Ok(views.html.index(null))
+    if (HomeController.logaccount.email == "example@example.com") {
+      Ok(views.html.index(null))
+    } else {
+      Ok(views.html.index(HomeController.logaccount))
+    }
   }
+
 
   def manageAccount = Action {
     if (HomeController.logaccount.email != "example@example.com") {
@@ -33,7 +39,11 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def register = Action {
-    Ok(views.html.register(assetsFinder))
+    if (HomeController.logaccount.email == "example@example.com") {
+      Ok(views.html.register(assetsFinder))
+    } else {
+      Ok(views.html.index(HomeController.logaccount));
+    }
   }
 
   def login = Action {
@@ -64,14 +74,27 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       // Change this to check user input match to the admin password's salt-free hash
       admin=true)
     val am = new AccountManager
-    am.editAccount(HomeController.logaccount, newAccount);
+    am.writeToCSV(am.editAccount(HomeController.logaccount, newAccount));
     HomeController.logaccount = newAccount;
     Ok(views.html.index(newAccount));
+  }
+  def aftereditpass = Action { implicit request =>
+    val am = new AccountManager
+    if (request.body.asFormUrlEncoded.get("password").head == request.body.asFormUrlEncoded.get("password2").head) {
+      am.writeToCSV(am.editAccount(HomeController.logaccount, HomeController.logaccount.changePassword(
+        request.body.asFormUrlEncoded.get("password").head
+      )));
+      HomeController.logaccount.changePassword(request.body.asFormUrlEncoded.get("password").head)
+      Ok(views.html.index(HomeController.logaccount))
+    } else {
+      Ok(views.html.changepassword("PASSWORDS MUST MATCH"))
+    }
   }
   def edit = Action {
     Ok(views.html.manageAccount(HomeController.logaccount, assetsFinder))
   }
   def after = Action { implicit request =>
+    val am = new AccountManager
     val newProfile = Profile(request.body.asFormUrlEncoded.get("firstname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("lastname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("birthyear").head.toInt,
@@ -80,10 +103,9 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     val newAccount = Account(request.body.asFormUrlEncoded.get("email").head,
       Account.hashPasswordPlusSalt(request.body.asFormUrlEncoded.get("password").head),
       newProfile,
-      // Change this to check user input match to the admin password's salt-free hash
-      admin=true)
+      Account.hashPassword(
+                request.body.asFormUrlEncoded.get("adminpassword").head, "") ==  AccountManager.adminHash)
     System.out.println(newAccount);
-    val am = new AccountManager
     am.writeToCSV(am.addAccount(newAccount))
     HomeController.logaccount = newAccount;
     Ok(views.html.index(newAccount))

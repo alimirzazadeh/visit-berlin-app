@@ -17,3 +17,5 @@ POST /after controllers.HomeController.after
 GET /edit controllers.HomeController.edit
 + nocsrf
 POST /afteredit controllers.HomeController.afteredit
++ nocsrf
+POST /aftereditpass controllers.HomeController.aftereditpass
