@@ -14,3 +14,6 @@ POST /afterlogin controllers.HomeController.afterlogin
 GET /afterlogin controllers.HomeController.beforelogin
 + nocsrf
 POST /after controllers.HomeController.after
+GET /edit controllers.HomeController.edit
++ nocsrf
+POST /afteredit controllers.HomeController.afteredit

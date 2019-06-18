@@ -1,4 +1,5 @@
-@(nameLogged: String, LoginStatus: String)
+@(accountlogged: Account)
+
 @main("Berlin Travel Guide") {
     <div class="site-wrap">
 
@@ -26,7 +27,7 @@
 
                             <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
                                 <li class="has-children">
-                                    <a href="">@LoginStatus</a>
+                                    <a href="">Account</a>
                                     <ul class="dropdown">
                                         <li><a href="">Logout</a></li>
                                         <li><a href="@routes.HomeController.login()">Login</a></li>
@@ -63,7 +64,10 @@
             <div class="container">
                 <div class="row text-center justify-content-center mb-5">
                     <div class="col-md-7" data-aos="fade-up">
-                        <h2>Welcome @nameLogged</h2>
+                        <h2>Welcome </h2>
+                        @if(accountlogged != null) {
+                            <h3> @accountlogged.profile.firstName @accountlogged.profile.lastName</h3>
+                        }
                     </div>
                 </div>
 
@@ -169,12 +173,10 @@
                             </div>
                         </div>
                     </div>
-
-
+                    
                     </div>
 
                 </div>
-            </div>
         </footer>
 
     </div>
