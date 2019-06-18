@@ -6,7 +6,8 @@ import play.api.data._
 import play.api.data.Forms._
 import models.UserData
 
-class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: AssetsFinder) extends AbstractController(cc) {
+class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: AssetsFinder)
+  extends AbstractController(cc) {
 
   def hello = Action {
     Ok(views.html.hello())
@@ -21,7 +22,11 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
 
   // Home Page
   def index = Action {
-    Ok(views.html.index(assetsFinder))
+    Ok(views.html.index(null))
+  }
+
+  def manageAccount = Action {
+    Ok(views.html.manageAccount(assetsFinder))
   }
 
   def register = Action {
@@ -32,7 +37,16 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.login(null))
   }
 
+  def logout = Action {
+    Ok(views.html.index(null))
+  }
+
+  def place = Action {
+    Ok(views.html.placepage("Account", assetsFinder))
+  }
+
   def after = Action { implicit request =>
+    val am = new AccountManager
     val newProfile = Profile(request.body.asFormUrlEncoded.get("firstname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("lastname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("birthyear").head.toInt,
@@ -40,12 +54,10 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       request.body.asFormUrlEncoded.get("interests").head)
     val newAccount = Account(request.body.asFormUrlEncoded.get("email").head,
       Account.hashPasswordPlusSalt(request.body.asFormUrlEncoded.get("password").head),
-      newProfile,
-      // Change this to check user input match to the admin password's salt-free hash
-      admin=true)
-    val am = new AccountManager
+      newProfile, Account.hashPassword(
+        request.body.asFormUrlEncoded.get("adminpassword").head, "") ==  AccountManager.adminHash)
     am.writeToCSV(am.addAccount(newAccount))
-    Ok(views.html.after(newAccount))
+    Ok(views.html.index(newAccount.profile.firstName + " " + newAccount.profile.lastName))
   }
 
   def afterlogin = Action { implicit request =>
@@ -55,7 +67,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     val accountTest = am.verifyLogin(email, password)
     accountTest match {
       case None => Ok(views.html.login("INCORRECT PASSWORD"))
-      case Some(userAccount) => Ok(views.html.afterlogin(userAccount))
+      case Some(userAccount) => Ok(views.html.index(userAccount.profile.firstName + " " + userAccount.profile.lastName))
     }
   }
 

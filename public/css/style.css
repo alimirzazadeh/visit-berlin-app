@@ -13,6 +13,12 @@ body {
   background: #000;
   color: #fff; }
 
+.adminpass {
+  -webkit-transition: .3s all ease;
+  -o-transition: .3s all ease;
+  transition: .3s all ease;
+}
+
 a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
@@ -1283,4 +1289,13 @@ a {
       border-radius: 50%; }
   .site-block-testimonial p {
     font-size: 1.2rem;
-    color: #fff; }
+    color: #fff;
+  }
+
+  .changepass {
+    color: white;
+  }
+
+  .container-login100 {
+    background-attachment: fixed;
+  }

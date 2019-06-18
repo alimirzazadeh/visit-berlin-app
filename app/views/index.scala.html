@@ -1,4 +1,4 @@
-@(assetsFinder: AssetsFinder)
+@(nameLogged: String)
 @main("Berlin Travel Guide") {
     <div class="site-wrap">
 
@@ -29,7 +29,7 @@
                                 <li class="has-children">
                                     <a href="">Account</a>
                                     <ul class="dropdown">
-                                        <li><a href="">Logout</a></li>
+                                        <li><a href="@routes.HomeController.logout()">Logout</a></li>
                                         <li><a href="@routes.HomeController.login()">Login</a></li>
                                         <li><a href="@routes.HomeController.register()">Register</a></li>
                                     </ul>
@@ -62,7 +62,7 @@
             <div class="container">
                 <div class="row text-center justify-content-center mb-5">
                     <div class="col-md-7" data-aos="fade-up">
-                        <h2>Berlin Shit</h2>
+                        <h2>Welcome @nameLogged</h2>
                     </div>
                 </div>
 
@@ -142,7 +142,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="mb-5">
-                            <h3 class="footer-heading mb-4">About Fotograp</h3>
+                            <h3 class="footer-heading mb-4">About Berlin Kennen Lernen</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe pariatur reprehenderit vero atque, consequatur id ratione, et non dignissimos culpa? Ut veritatis, quos illum totam quis blanditiis, minima minus odio!</p>
                         </div>
                     </div>
