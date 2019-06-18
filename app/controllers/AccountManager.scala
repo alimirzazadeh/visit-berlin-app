@@ -4,6 +4,15 @@ import java.io.File
 import java.io.PrintWriter
 import scala.io.Source
 
+/**
+  * Class representing an AccountManager that is capable of writing user-generated accounts into
+  * a persistent CSV file, reading the list of all valid accounts from said file, and performing
+  * adds, removes, and edits as users register new accounts, change account details, or delete
+  * their accounts. An AccountManager is instantiated in scenarios where the user is attempting
+  * to create a new account or log into an existing one and contains the logic necessary to check
+  * if emails exist within the persistent files, verify that the user inputs the correct password
+  * by comparing cryptographic hashes, and update the persistent file according to each situation.
+  */
 class AccountManager {
 
   /** Uses tail recursion to read a CSV file with all of the information of the accounts

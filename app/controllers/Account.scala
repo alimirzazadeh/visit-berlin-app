@@ -4,8 +4,15 @@ import java.security.MessageDigest
 import scala.util.Random
 
 /**
-  * Class containing all data for a user's accounts as well as the functions to cryptographically
-  * secure user passwords and edit existing data.
+  * Class containing all data for a user's account as well as the functions to cryptographically
+  * secure user passwords and edit existing data. Account instances contain all relevant user
+  * data, including a personal profile, and form the structure for registering, logging in, and
+  * using the web application's services as either a regular user or an administrator with editing
+  * privileges. They do not contain raw user passwords anywhere, but rather only store hashed
+  * passwords and associated cryptographic salts for sake of data security. The user is capable
+  * of changing all fields within their account once they register one, provided the inputted
+  * email is always unique and of proper form. The addition of a random salt string in hashing
+  * protects user accounts that coincidentally register with the same raw password.
   * @param email user's email String inputted at registration, must match proper email format
   * @param saltedHash String tuple containing a randomly generated salt string and the resultant
   *                   hash from performing SHA-256 on the user's inputted password plus the salt
