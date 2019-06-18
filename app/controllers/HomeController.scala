@@ -25,7 +25,11 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def manageAccount = Action {
-    Ok(views.html.manageAccount(assetsFinder))
+    if (HomeController.logaccount.email != "example@example.com") {
+      Ok(views.html.manageAccount(HomeController.logaccount, assetsFinder))
+    } else {
+      Ok(views.html.index(null))
+    }
   }
 
   def register = Action {
@@ -37,13 +41,32 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def logout = Action {
+    HomeController.logaccount = Account("example@example.com", ("nothing", "none"), Profile("NOT", "NO", 1999, "NOWW", "None"), false);
     Ok(views.html.index(null))
   }
 
   def place = Action {
     Ok(views.html.placepage("Account", assetsFinder))
   }
-
+  def afteredit = Action { implicit request =>
+    val newProfile = Profile(request.body.asFormUrlEncoded.get("firstname").head.toUpperCase,
+      request.body.asFormUrlEncoded.get("lastname").head.toUpperCase,
+      request.body.asFormUrlEncoded.get("birthyear").head.toInt,
+      request.body.asFormUrlEncoded.get("hometown").head.toUpperCase,
+      request.body.asFormUrlEncoded.get("interests").head)
+    val newAccount = Account(request.body.asFormUrlEncoded.get("email").head,
+      HomeController.logaccount.saltedHash,
+      newProfile,
+      // Change this to check user input match to the admin password's salt-free hash
+      admin=true)
+    val am = new AccountManager
+    am.editAccount(HomeController.logaccount, newAccount);
+    HomeController.logaccount = newAccount;
+    Ok(views.html.index(newAccount));
+  }
+  def edit = Action {
+    Ok(views.html.manageAccount(HomeController.logaccount, assetsFinder))
+  }
   def after = Action { implicit request =>
     val newProfile = Profile(request.body.asFormUrlEncoded.get("firstname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("lastname").head.toUpperCase,
@@ -55,19 +78,27 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       newProfile,
       // Change this to check user input match to the admin password's salt-free hash
       admin=true)
+    System.out.println(newAccount);
     val am = new AccountManager
     am.writeToCSV(am.addAccount(newAccount))
-    Ok(views.html.index(newAccount.profile.firstName + " " + newAccount.profile.lastName))
+    HomeController.logaccount = newAccount;
+    Ok(views.html.index(newAccount))
   }
 
   def afterlogin = Action { implicit request =>
     val email = request.body.asFormUrlEncoded.get("email").head
     val password = request.body.asFormUrlEncoded.get("password").head
+    System.out.println(email);
     val am = new AccountManager
     val accountTest = am.verifyLogin(email, password)
     accountTest match {
       case None => Ok(views.html.login("INCORRECT PASSWORD"))
-      case Some(userAccount) => Ok(views.html.index(userAccount.profile.firstName + " " + userAccount.profile.lastName))
+      case Some(userAccount) => {
+        HomeController.logaccount = userAccount
+        Ok(views.html.index(userAccount))
+        //HomeController.logaccount.changeEmail(userAccount.email)
+
+      }
     }
   }
 
@@ -85,6 +116,10 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
 //  def formStuff = Action {
 //    Ok(views.html.)
 //  }
+}
+
+object HomeController {
+  var logaccount = new Account("example@example.com", ("nothing", "none"), Profile("NOT", "NO", 1999, "NOWW", "None"), false);
 }
 
 //case class UserData(name: String, age: Int) {
