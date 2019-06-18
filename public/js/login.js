@@ -83,5 +83,10 @@
         
     });
 
+    $('.admincheck').on('click', function(){
+        $('.adminpass').toggle();
+    });
 
-})(jQuery);
+
+
+    })(jQuery);

@@ -1,0 +1,65 @@
+@(assetsFinder: AssetsFinder)
+@main("Berlin Travel Guide") {
+    <section id="loginbox text-center justify-content-center">
+        <div class="limiter">
+            <div class="container-login100" style="background-image: url(@routes.Assets.versioned("/images/bg-01.jpg"));">
+                <div class="wrap-login100">
+                    <form class="login100-form validate-form" action="/after" method=POST>
+                        <span class="login100-form-logo">
+                            <img src="@routes.Assets.versioned("images/berlinlogo.png")" class="img-fluid">
+                        </span>
+
+                        <span class="login100-form-title mt-4 p-b-34 p-t-27">
+                            Account
+                        </span>
+
+                        <div class="wrap-input100 validate-input" data-validate = "First Name">
+                            <input class="input100" type="text" onkeyup="this.value = this.value.toUpperCase();" name="firstname" placeholder="First Name">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate = "Last Name">
+                            <input class="input100" type="text" onkeyup="this.value = this.value.toUpperCase();" name="lastname" placeholder="Last Name">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate = "Email">
+                            <input class="input100" type="email" name="email" placeholder="Enter Email" pattern=".+gatech.edu|.+gmail.com" required>
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+                        <h4 class="profileheader text-center">
+                            Profile
+                        </h4>
+
+                        <div class="wrap-input100 validate-input" data-validate = "Enter Birth Year">
+                            <input class="input100" type="number" name="birthyear" min="1900" max="2019" placeholder="Birth Year">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate = "Enter Hometown">
+                            <input class="input100" type="text" name="hometown" placeholder="Hometown">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate = "Enter Interests">
+                            <input class="input100" type="text" name="interests" placeholder="Interests">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+                        <a href="#" class="changepass">Change Password</a>
+
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn">
+                                Update
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="dropDownSelect1"></div>
+    </section>
+}
