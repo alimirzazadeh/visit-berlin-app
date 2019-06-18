@@ -70,7 +70,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       // Change this to check user input match to the admin password's salt-free hash
       admin=true)
     val am = new AccountManager
-    am.editAccount(HomeController.logaccount, newAccount);
+    am.writeToCSV(am.editAccount(HomeController.logaccount, newAccount));
     HomeController.logaccount = newAccount;
     Ok(views.html.index(newAccount));
   }
