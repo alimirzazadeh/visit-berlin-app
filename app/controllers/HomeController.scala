@@ -40,6 +40,10 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.login(null))
   }
 
+  def changepassword = Action {
+    Ok(views.html.changepassword(null))
+  }
+
   def logout = Action {
     HomeController.logaccount = Account("example@example.com", ("nothing", "none"), Profile("NOT", "NO", 1999, "NOWW", "None"), false);
     Ok(views.html.index(null))

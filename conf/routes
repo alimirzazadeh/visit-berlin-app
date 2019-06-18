@@ -7,7 +7,8 @@ GET /home controllers.HomeController.index
 GET  /assets/*file   controllers.Assets.versioned(path="/public", file)
 GET /place controllers.HomeController.place
 GET /after controllers.HomeController.before
-GET /manageaccount controllers.HomeController.manageAccount
+GET /changepassword controllers.HomeController.changepassword
+GET /account controllers.HomeController.manageAccount
 + nocsrf
 POST /afterlogin controllers.HomeController.afterlogin
 GET /afterlogin controllers.HomeController.beforelogin
