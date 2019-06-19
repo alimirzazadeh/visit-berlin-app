@@ -49,6 +49,9 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.placepage("Account", assetsFinder))
   }
 
+  /**
+    * Collects the information from the registration form to create an account
+    */
   def after = Action { implicit request =>
     val am = new AccountManager
     val newProfile = Profile(request.body.asFormUrlEncoded.get("firstname").head.toUpperCase,
@@ -64,6 +67,9 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.index(newAccount.profile.firstName + " " + newAccount.profile.lastName))
   }
 
+  /**
+    * Logic for verifying a correct login with the correct password and email
+    */
   def afterlogin = Action { implicit request =>
     val email = request.body.asFormUrlEncoded.get("email").head
     val password = request.body.asFormUrlEncoded.get("password").head
@@ -75,6 +81,9 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     }
   }
 
+  /**
+    * The structure of the user form for registration
+    */
   val userForm = Form(
     mapping(
       "firstname" -> text,
