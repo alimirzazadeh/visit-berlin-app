@@ -4,6 +4,7 @@
         <div class="limiter">
             <div class="container-login100" style="background-image: url(@routes.Assets.versioned("/images/bg-01.jpg"));">
                 <div class="wrap-login100">
+                    <a href="@routes.HomeController.index()" style="color: white">Back to Home</a>
                     <form class="login100-form validate-form" action="/after" method=POST>
                         <span class="login100-form-logo">
                             <img src="@routes.Assets.versioned("images/berlinlogo.png")" class="img-fluid">
@@ -14,12 +15,12 @@
                         </span>
 
                         <div class="wrap-input100 validate-input" data-validate = "Enter First Name">
-                            <input class="input100" type="text" onkeyup="this.value = this.value.toUpperCase();" name="firstname" placeholder="First Name">
+                            <input class="input100" type="text" name="firstname" placeholder="First Name">
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate = "Enter Last Name">
-                            <input class="input100" type="text" onkeyup="this.value = this.value.toUpperCase();" name="lastname" placeholder="Last Name">
+                            <input class="input100" type="text" name="lastname" placeholder="Last Name">
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
 
@@ -65,7 +66,7 @@
                         </div>
 
                         <div class="wrap-input100 validate-input adminpass" style="display: none;" data-validate="Admin Password">
-                            <input class="input100" type="password" name="adminpassword" placeholder="Admin Password">
+                            <input class="input100" type="password" name="adminpassword" value="password" placeholder="Admin Password">
                             <span class="focus-input100" data-placeholder="&#xf191;"></span>
                         </div>
 

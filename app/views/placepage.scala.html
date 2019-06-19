@@ -18,7 +18,7 @@
                 <div class="row">
 
                     <div class="col-6 col-xl-2">
-                        <h1 class="mb-0"><a href="index.html" class="text-black h2 mb-0">Berlin<span class="text-primary">.</span></a></h1>
+                        <h1 class="mb-0"><a href=@routes.HomeController.index() class="text-black h2 mb-0">Berlin<span class="text-primary">.</span></a></h1>
                     </div>
                     <div class="col-10 col-md-8 d-none d-xl-block align-items-center">
                         <nav class="site-navigation position-relative text-right text-lg-center" role="navigation">
@@ -27,15 +27,15 @@
                                 <li class="has-children">
                                     <a href="">@LoginStatus</a>
                                     <ul class="dropdown">
-                                        <li><a href="">Logout</a></li>
+                                        <li><a href="@routes.HomeController.logout()">Logout</a></li>
                                         <li><a href="@routes.HomeController.login()">Login</a></li>
                                         <li><a href="@routes.HomeController.register()">Register</a></li>
                                         <li><a href="@routes.HomeController.manageAccount()">Manage Account</a></li>
                                     </ul>
                                 </li>
-                                <li class="active"><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li class="active"><a href=@routes.HomeController.index()>Home</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Contact</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -214,18 +214,6 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h3 class="footer-heading mb-4">Follow Me</h3>
-
-                        <div>
-                            <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
-                            <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
-                            <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-                            <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
-                        </div>
-
                     </div>
 
                 </div>

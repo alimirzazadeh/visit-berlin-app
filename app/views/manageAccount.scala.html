@@ -1,10 +1,11 @@
-@(assetsFinder: AssetsFinder)
+@(theaccount: Account, assetsFinder: AssetsFinder)
 @main("Berlin Travel Guide") {
     <section id="loginbox text-center justify-content-center">
         <div class="limiter">
             <div class="container-login100" style="background-image: url(@routes.Assets.versioned("/images/bg-01.jpg"));">
                 <div class="wrap-login100">
-                    <form class="login100-form validate-form" action="/after" method=POST>
+                    <a href="@routes.HomeController.index()" style="color: white">Back to Home</a>
+                    <form class="login100-form validate-form" action="/afteredit" method=POST>
                         <span class="login100-form-logo">
                             <img src="@routes.Assets.versioned("images/berlinlogo.png")" class="img-fluid">
                         </span>
@@ -14,17 +15,17 @@
                         </span>
 
                         <div class="wrap-input100 validate-input" data-validate = "First Name">
-                            <input class="input100" type="text" onkeyup="this.value = this.value.toUpperCase();" name="firstname" placeholder="First Name">
+                            <input class="input100" type="text" name="firstname" value=@theaccount.profile.firstName>
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate = "Last Name">
-                            <input class="input100" type="text" onkeyup="this.value = this.value.toUpperCase();" name="lastname" placeholder="Last Name">
+                            <input class="input100" type="text" name="lastname" value=@theaccount.profile.lastName>
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate = "Email">
-                            <input class="input100" type="email" name="email" placeholder="Enter Email" pattern=".+gatech.edu|.+gmail.com" required>
+                            <input class="input100" type="email" name="email" value=@theaccount.email pattern=".+gatech.edu|.+gmail.com" required>
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
 
@@ -33,21 +34,24 @@
                         </h4>
 
                         <div class="wrap-input100 validate-input" data-validate = "Enter Birth Year">
-                            <input class="input100" type="number" name="birthyear" min="1900" max="2019" placeholder="Birth Year">
+                            <input class="input100" type="number" name="birthyear" min="1900" max="2019" value=@theaccount.profile.birthYear>
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate = "Enter Hometown">
-                            <input class="input100" type="text" name="hometown" placeholder="Hometown">
+                            <input class="input100" type="text" name="hometown" value=@theaccount.profile.hometown>
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate = "Enter Interests">
-                            <input class="input100" type="text" name="interests" placeholder="Interests">
+                            <input class="input100" type="text" name="interests" value=@theaccount.profile.interests>
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
 
-                        <a href="#" class="changepass">Change Password</a>
+                        <input class="input100" type="hidden" name="oldaccount" value=@theaccount>
+
+                        <a href="@routes.HomeController.changepassword()" class="changepass">Change Password</a>
+
 
                         <div class="container-login100-form-btn">
                             <button class="login100-form-btn">
