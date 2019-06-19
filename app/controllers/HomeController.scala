@@ -6,6 +6,10 @@ import play.api.data._
 import play.api.data.Forms._
 import models.UserData
 
+/**
+  * Class containing the controlling logic for the different pages on
+  * the Berlin website and their navigation
+  */
 class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: AssetsFinder)
   extends AbstractController(cc) {
 
