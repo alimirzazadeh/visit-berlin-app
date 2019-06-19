@@ -5,7 +5,7 @@
             <div class="container-login100" style="background-image: url(@routes.Assets.versioned("/images/bg-01.jpg"));">
                 <div class="wrap-login100">
                     <a href="@routes.HomeController.index()" style="color: white">Back to Home</a>
-                    <form class="login100-form validate-form" action="/after" method=POST>
+                    <form class="login100-form validate-form" onsubmit="return checkPassword(this)" action="/after" method=POST>
                         <span class="login100-form-logo">
                             <img src="@routes.Assets.versioned("images/berlinlogo.png")" class="img-fluid">
                         </span>
@@ -82,5 +82,31 @@
 
 
         <div id="dropDownSelect1"></div>
+        <script>
+                function checkPassword(form) {
+                    var password1 = form.password.value
+                    var password2 = form.confirmpassword.value;
+                    console.log("password: " + password1)
+                    console.log("confirm password: " + password2)
+
+                    // If password not entered
+                    if (password1 == '')
+                        alert ("Please enter Password");
+
+                    // If confirm password not entered
+                    else if (password2 == '')
+                        alert ("Please confirm password");
+
+                    // If Not same return False.
+                    else if (password1 != password2) {
+                        alert ("Passwords did not match")
+                        return false;
+                    }
+                    // If same return True.
+                    else{
+                        return true;
+                    }
+                }
+        </script>
     </section>
 }
