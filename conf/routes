@@ -9,7 +9,7 @@ GET /place/:id controllers.HomeController.place(id: Integer)
 GET /after controllers.HomeController.before
 GET /changepassword controllers.HomeController.changepassword
 GET /account controllers.HomeController.manageAccount
-GET /changepage controllers.HomeController.changepage
+GET /changepages controllers.HomeController.changepage
 + nocsrf
 POST /afterlogin controllers.HomeController.afterlogin
 GET /afterlogin controllers.HomeController.beforelogin
