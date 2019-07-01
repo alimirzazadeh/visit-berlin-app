@@ -68,7 +68,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def place(id: Integer) = Action {
-    Ok(views.html.placepage("Account", assetsFinder, new Attraction("hi",null , id.toString)))
+    Ok(views.html.placepage("Account", assetsFinder, new Attraction("hi",null , id.toString, "location")))
   }
 
   /**
