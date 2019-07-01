@@ -1,6 +1,5 @@
 package controllers
 
-import java.awt.Image
 
 case class Attraction(name: String, pictureURL: String, description: String, location: String) {
 

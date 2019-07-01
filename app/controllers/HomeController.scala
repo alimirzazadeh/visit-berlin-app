@@ -98,6 +98,16 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       Ok(views.html.changepassword("PASSWORDS MUST MATCH"))
     }
   }
+
+  def afterEditAttraction = Action { implicit request =>
+    val am = new AttractionManager;
+    val newPage = new Attraction(request.body.asFormUrlEncoded.get("name").head,
+      request.body.asFormUrlEncoded.get("pictureURL").head, request.body.asFormUrlEncoded.get("description").head,
+      request.body.asFormUrlEncoded.get("location").head)
+    am.writeToCSV(am.editAttraction(newPage));
+    Ok(views.html.placepage("idk", assetsFinder, newPage))
+  }
+
   def edit = Action {
     Ok(views.html.manageAccount(HomeController.logaccount, assetsFinder))
   }
