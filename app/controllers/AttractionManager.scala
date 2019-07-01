@@ -48,15 +48,17 @@ class AttractionManager {
     updatedList
   }
 
-  def editAttraction(oldAttraction: Attraction, newAttraction: Attraction): List[Attraction] = {
+  def editAttraction(newAttraction: Attraction): List[Attraction] = {
     val attractionList = readFromCSV
-    val updatedList = if (!findAttraction(attractionList, oldAttraction)) attractionList else newAttraction :: attractionList.filter(_.name != oldAttraction.name)
+    val updatedList = if (!findAttraction(attractionList, newAttraction)) attractionList else newAttraction :: attractionList.filter(_.name != newAttraction.name)
     updatedList
   }
 
   def findAttraction(attractionList: List[Attraction], attraction: Attraction): Boolean = {
     attractionList.exists(_.name == attraction.name)
   }
+
+
 }
 
 object AttractionManager {
