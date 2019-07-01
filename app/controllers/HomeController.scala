@@ -75,7 +75,6 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   def place(id: String) = Action {
     val am = new AttractionManager();
     Ok(views.html.placepage("Account", assetsFinder, am.attractionFromName(id)))
-  }
 
   /**
     * Collects the information from the registration form to create an account
