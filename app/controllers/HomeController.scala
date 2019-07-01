@@ -33,6 +33,10 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     }
   }
 
+  def changepage = Action {
+    Ok(views.html.changepages(null, assetsFinder, "description", "imageurl", "location"))
+  }
+
 
   def manageAccount = Action {
     if (HomeController.logaccount.email != "example@example.com") {
