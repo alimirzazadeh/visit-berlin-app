@@ -1,4 +1,4 @@
-@(LoginStatus: String, assetsFinder: AssetsFinder)
+@(LoginStatus: String, assetsFinder: AssetsFinder, attraction: Attraction)
 @main("Place") {
     <div class="site-wrap">
 
@@ -48,7 +48,7 @@
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-7 text-center" data-aos="fade-up">
-                        <h1>Place Name</h1>
+                        <h1>Place Name @attraction.description</h1>
                     </div>
                 </div>
             </div>
