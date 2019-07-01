@@ -33,8 +33,13 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     }
   }
 
-  def changepage = Action {
-    Ok(views.html.changepages(null, assetsFinder, "description", "imageurl", "location"))
+  def changepage(id: String) = Action {
+    val am = new AttractionManager();
+    var attraction = am.attractionFromName(id);
+    if (attraction == null) {
+      attraction = new Attraction("","","","")
+    }
+    Ok(views.html.changepages(null, assetsFinder, am.attractionFromName(id)))
   }
 
 
@@ -67,8 +72,9 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.index(null))
   }
 
-  def place(id: Integer) = Action {
-    Ok(views.html.placepage("Account", assetsFinder, new Attraction("hi",null , id.toString)))
+  def place(id: String) = Action {
+    val am = new AttractionManager();
+    Ok(views.html.placepage("Account", assetsFinder, am.attractionFromName(id)))
   }
 
   /**
