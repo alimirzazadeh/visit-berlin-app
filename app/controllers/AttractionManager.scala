@@ -58,11 +58,22 @@ class AttractionManager {
     attractionList.exists(_.name == attraction.name)
   }
 
+  def attractionFromName(name: String): Attraction = {
+    val foundAttractions = readFromCSV.filter(_.name == name)
+    if (foundAttractions.nonEmpty) foundAttractions.head
+    else null
+  }
+
 
 }
 
 object AttractionManager {
 
   val filename: String = "public/attractions.csv"
+
+  def main(args: Array[String]): Unit = {
+    val am = new AttractionManager()
+    am.addAttraction(new Attraction("test", "test", "test", "test"))
+  }
 
 }
