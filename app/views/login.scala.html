@@ -1,4 +1,4 @@
-@(tried: String)
+@(tried: String, falseRegistration: Boolean)
 @main("Berlin Travel Guide") {
     <section id="loginbox text-center justify-content-center">
         <div class="limiter">
@@ -43,5 +43,10 @@
 
 
         <div id="dropDownSelect1"></div>
+        <script>
+            @if(falseRegistration) {
+                alert("The email you have attempted to register already exists.");
+            }
+        </script>
     </section>
 }
