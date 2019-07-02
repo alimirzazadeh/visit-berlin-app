@@ -115,7 +115,10 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     val newPage = new Attraction(request.body.asFormUrlEncoded.get("name").head, //change thiss!!!!!!
       request.body.asFormUrlEncoded.get("pictureURL").head, request.body.asFormUrlEncoded.get("description").head,
       request.body.asFormUrlEncoded.get("location").head)
-    am.writeToCSV(am.editAttraction(newPage));
+    if (oldPage.name == "a")
+      am.writeToCSV(am.addAttraction(newPage))
+    else
+      am.writeToCSV(am.editAttraction(oldPage, newPage))
     Ok(views.html.placepage("idk", assetsFinder, newPage))
   }
 
