@@ -49,7 +49,8 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def register = Action {
-    if (HomeController.logaccount.email == "example@example.com") Ok(views.html.register(assetsFinder)) else
+    if (HomeController.logaccount.email == "example@example.com") Ok(views.html.register(
+      assetsFinder, wrongAdminPassword = false)) else
       Ok(views.html.index(HomeController.logaccount))
   }
 
@@ -127,13 +128,15 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       request.body.asFormUrlEncoded.get("birthyear").head.toInt,
       request.body.asFormUrlEncoded.get("hometown").head.toUpperCase,
       request.body.asFormUrlEncoded.get("interests").head)
+    val adminInput = if (request.body.asFormUrlEncoded.get("adminpassword").head != "password") {
+      Account.hashPassword(request.body.asFormUrlEncoded.get("adminpassword").head, "")
+    } else "password"
     val newAccount = Account(request.body.asFormUrlEncoded.get("email").head,
       Account.hashPasswordPlusSalt(request.body.asFormUrlEncoded.get("password").head),
-      newProfile,
-      Account.hashPassword(
-        request.body.asFormUrlEncoded.get("adminpassword").head, "") == AccountManager.adminHash)
-    if (am.findAccount(am.readFromCSV, newAccount)) {
-      println("Hey we found tit")
+      newProfile, adminInput == AccountManager.adminHash)
+    if (adminInput != "password" && adminInput != AccountManager.adminHash) {
+      Ok(views.html.register(assetsFinder, true))
+    } else if (am.findAccount(am.readFromCSV, newAccount)) {
       Ok(views.html.login(null, true))
     } else {
       am.writeToCSV(am.addAccount(newAccount))
