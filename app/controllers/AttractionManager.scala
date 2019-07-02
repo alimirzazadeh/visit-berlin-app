@@ -8,7 +8,7 @@ class AttractionManager {
   def readFromCSV: List[Attraction] = {
     def createList(attractionList: List[Attraction], csvInfo: Iterator[String]): List[Attraction] = {
       if (csvInfo.hasNext) {
-        val info = csvInfo.next().split(",")
+        val info = csvInfo.next().split('^')
         /*Different indexes in the info list are specific pieces of information in the csv file.
          *This allows the csv file to make sense when looked at by a human, as everything is in order
          */
@@ -34,10 +34,10 @@ class AttractionManager {
 
   def writeToCSV(attractionList: List[Attraction]): Unit = {
     val writer = new PrintWriter(new File(AttractionManager.filename))
-    writer.write("name,pictureURL,description,location\n")
+    writer.write("name^pictureURL^description^location\n")
     for (attraction <- attractionList) {
       val currentAttraction = attraction.toList
-      for (item <- 0 to 2) writer.write(currentAttraction(item) + ",")
+      for (item <- 0 to 2) writer.write(currentAttraction(item).replaceAll("\\s", " ") + "^")
       writer.write(currentAttraction(3) + '\n')
     }
     writer.close()
