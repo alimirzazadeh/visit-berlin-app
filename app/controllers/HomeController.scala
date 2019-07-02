@@ -79,7 +79,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
 
   def place(id: String) = Action {
     val am = new AttractionManager();
-    Ok(views.html.placepage("Account", assetsFinder, am.attractionFromName(id)))
+    Ok(views.html.placepage("Account", assetsFinder, am.attractionFromName(id), HomeController.logaccount))
   }
   /**
     * Collects the information from the registration form to create an account
@@ -125,7 +125,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       am.writeToCSV(am.addAttraction(newPage))
     else
       am.writeToCSV(am.editAttraction(oldPage, newPage))
-    Ok(views.html.placepage("idk", assetsFinder, newPage))
+    Ok(views.html.placepage("idk", assetsFinder, newPage, HomeController.logaccount))
   }
 
   def edit = Action {

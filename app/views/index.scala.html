@@ -89,7 +89,7 @@
                     }
                 </div>
                 <div class="text-center">
-                    <a href="@routes.HomeController.changepage("addPage")">Add Page</a>
+                    @if(accountlogged != null && accountlogged.admin) {<a href="@routes.HomeController.changepage("addPage")">Add Page</a>}
                 </div>
             </div>
         </div>

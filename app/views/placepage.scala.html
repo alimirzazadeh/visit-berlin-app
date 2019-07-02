@@ -1,4 +1,4 @@
-@(LoginStatus: String, assetsFinder: AssetsFinder, attraction: Attraction)
+@(LoginStatus: String, assetsFinder: AssetsFinder, attraction: Attraction, accountlogged: Account)
 @main("Place") {
     <div class="site-wrap">
 
@@ -181,7 +181,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <a href="@routes.HomeController.changepage(attraction.name)">Edit Page</a>
+                @if(accountlogged != null && accountlogged.admin) {<a href="@routes.HomeController.changepage(attraction.name)">Edit Page</a>}
             </div>
         </div>
 
