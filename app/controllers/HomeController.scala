@@ -111,7 +111,8 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
 
   def afterEditAttraction = Action { implicit request =>
     val am = new AttractionManager;
-    val newPage = new Attraction(request.body.asFormUrlEncoded.get("description").head, //change thiss!!!!!!
+    val oldPage = am.attractionFromName(request.body.asFormUrlEncoded.get("oldName").head);
+    val newPage = new Attraction(request.body.asFormUrlEncoded.get("name").head, //change thiss!!!!!!
       request.body.asFormUrlEncoded.get("pictureURL").head, request.body.asFormUrlEncoded.get("description").head,
       request.body.asFormUrlEncoded.get("location").head)
     am.writeToCSV(am.editAttraction(newPage));
