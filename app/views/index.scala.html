@@ -73,30 +73,20 @@
 
                 <div class="row">
                     @for(s <- attractionList) {
-                        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
-                            <a class="image-gradient" href="@routes.HomeController.place(s.name)">
-                                <figure>
-                                    <img src=@s.pictureURL alt="" class="img-fluid">
-                                </figure>
-                                <div class="text">
-                                    <h3>@s.name</h3>
-                                    <span>4.5 / 5</span>
-                                </div>
-                            </a>
-                        </div>
-                    }
-
-                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
-                        <a class="image-gradient" href="@routes.HomeController.place("place6")">
-                            <figure>
-                                <img src="@routes.Assets.versioned("/images/brandenberg.jpg")" alt="" class="img-fluid">
-                            </figure>
-                            <div class="text">
-                                <h3>Berlin Place 6</h3>
-                                <span>4.5 / 5</span>
+                        @if(s.name != "a") {
+                            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                                <a class="image-gradient" href="@routes.HomeController.place(s.name)">
+                                    <figure>
+                                        <img src=@s.pictureURL alt="" class="img-fluid">
+                                    </figure>
+                                    <div class="text">
+                                        <h3>@s.name</h3>
+                                        <span>4.5 / 5</span>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
+                        }
+                    }
                 </div>
                 <div class="text-center">
                     <a href="@routes.HomeController.changepage("addPage")">Add Page</a>
