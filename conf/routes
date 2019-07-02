@@ -5,10 +5,11 @@ GET /login controllers.HomeController.login
 GET /logout controllers.HomeController.logout
 GET /home controllers.HomeController.index
 GET  /assets/*file   controllers.Assets.versioned(path="/public", file)
-GET /place controllers.HomeController.place
+GET /place/:id controllers.HomeController.place(id: String)
 GET /after controllers.HomeController.before
 GET /changepassword controllers.HomeController.changepassword
 GET /account controllers.HomeController.manageAccount
+GET /changepages/:id controllers.HomeController.changepage(id: String)
 + nocsrf
 POST /afterlogin controllers.HomeController.afterlogin
 GET /afterlogin controllers.HomeController.beforelogin
@@ -19,3 +20,5 @@ GET /edit controllers.HomeController.edit
 POST /afteredit controllers.HomeController.afteredit
 + nocsrf
 POST /aftereditpass controllers.HomeController.aftereditpass
++ nocsrf
+POST /afterEditAttraction controllers.HomeController.afterEditAttraction
