@@ -1,4 +1,4 @@
-@(assetsFinder: AssetsFinder)
+@(assetsFinder: AssetsFinder, wrongAdminPassword: Boolean)
 @main("Berlin Travel Guide") {
     <section id="loginbox text-center justify-content-center">
         <div class="limiter">
@@ -42,7 +42,6 @@
                         <h4 class="profileheader text-center">
                             Profile
                         </h4>
-
                         <div class="wrap-input100 validate-input" data-validate = "Enter Birth Year">
                             <input class="input100" type="number" name="birthyear" min="1900" max="2019" placeholder="Birth Year">
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
@@ -89,6 +88,9 @@
                     console.log("password: " + password1)
                     console.log("confirm password: " + password2)
 
+                    @if(wrongAdminPassword) {
+                        alert("Incorrect administrator password");
+                    }
                     // If password not entered
                     if (password1 == '')
                         alert ("Please enter Password");
@@ -99,8 +101,7 @@
 
                     // If Not same return False.
                     else if (password1 != password2) {
-                        alert ("Passwords did not match")
-                        return false;
+                        alert ("Passwords did not match");
                     }
                     // If same return True.
                     else{
