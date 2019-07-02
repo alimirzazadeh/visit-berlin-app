@@ -31,8 +31,14 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       Ok(views.html.index(HomeController.logaccount))
   }
 
-  def changepage = Action {
-    Ok(views.html.changepages(null, assetsFinder, "description", "imageurl", "location"))
+  def changepage(id: String) = Action {
+    val am = new AttractionManager();
+    var attraction = am.attractionFromName(id);
+    if (attraction == null) {
+      attraction = new Attraction("a","a","a","a")
+    }
+    println(attraction);
+    Ok(views.html.changepages(null, assetsFinder, attraction))
   }
 
   def manageAccount = Action {
@@ -61,10 +67,10 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.index(null))
   }
 
-  def place(id: Integer) = Action {
-    Ok(views.html.placepage("Account", assetsFinder, new Attraction("hi", "", "", "")))
+  def place(id: String) = Action {
+    val am = new AttractionManager();
+    Ok(views.html.placepage("Account", assetsFinder, am.attractionFromName(id)))
   }
-
   /**
     * Collects the information from the registration form to create an account
     */
@@ -100,10 +106,14 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
 
   def afterEditAttraction = Action { implicit request =>
     val am = new AttractionManager;
-    val newPage = new Attraction(request.body.asFormUrlEncoded.get("name").head,
+    val oldPage = am.attractionFromName(request.body.asFormUrlEncoded.get("oldName").head);
+    val newPage = new Attraction(request.body.asFormUrlEncoded.get("name").head, //change thiss!!!!!!
       request.body.asFormUrlEncoded.get("pictureURL").head, request.body.asFormUrlEncoded.get("description").head,
       request.body.asFormUrlEncoded.get("location").head)
-    am.writeToCSV(am.editAttraction(newPage));
+    if (oldPage.name == "a")
+      am.writeToCSV(am.addAttraction(newPage))
+    else
+      am.writeToCSV(am.editAttraction(oldPage, newPage))
     Ok(views.html.placepage("idk", assetsFinder, newPage))
   }
 
