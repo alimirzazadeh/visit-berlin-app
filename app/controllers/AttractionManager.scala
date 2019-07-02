@@ -26,12 +26,19 @@ class AttractionManager {
     }
   }
 
+  /*
+  -change it to ^ separated
+  -get rid of new lines
+
+   */
+
   def writeToCSV(attractionList: List[Attraction]): Unit = {
     val writer = new PrintWriter(new File(AttractionManager.filename))
     writer.write("name,pictureURL,description,location\n")
     for (attraction <- attractionList) {
       val currentAttraction = attraction.toList
-      for (item <- 0 to 3) writer.write(currentAttraction(item) + ",")
+      for (item <- 0 to 2) writer.write(currentAttraction(item) + ",")
+      writer.write(currentAttraction(3) + '\n')
     }
     writer.close()
   }
@@ -48,9 +55,9 @@ class AttractionManager {
     updatedList
   }
 
-  def editAttraction(newAttraction: Attraction): List[Attraction] = {
+  def editAttraction(oldAttraction: Attraction, newAttraction: Attraction): List[Attraction] = {
     val attractionList = readFromCSV
-    val updatedList = if (!findAttraction(attractionList, newAttraction)) attractionList else newAttraction :: attractionList.filter(_.name != newAttraction.name)
+    val updatedList = if (!findAttraction(attractionList, oldAttraction)) attractionList else newAttraction :: attractionList.filter(_.name != oldAttraction.name)
     updatedList
   }
 
