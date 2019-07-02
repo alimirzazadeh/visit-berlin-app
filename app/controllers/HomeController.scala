@@ -26,10 +26,11 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
 
   // Home Page
   def index = Action {
+    val am = new AttractionManager()
     if (HomeController.logaccount.email == "example@example.com") {
-      Ok(views.html.index(null))
+      Ok(views.html.index(null, am.readFromCSV))
     } else {
-      Ok(views.html.index(HomeController.logaccount))
+      Ok(views.html.index(HomeController.logaccount, am.readFromCSV))
     }
   }
 
@@ -45,18 +46,20 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
 
 
   def manageAccount = Action {
+    val am = new AttractionManager()
     if (HomeController.logaccount.email != "example@example.com") {
       Ok(views.html.manageAccount(HomeController.logaccount, assetsFinder))
     } else {
-      Ok(views.html.index(null))
+      Ok(views.html.index(null, am.readFromCSV))
     }
   }
 
   def register = Action {
+    val am = new AttractionManager()
     if (HomeController.logaccount.email == "example@example.com") {
       Ok(views.html.register(assetsFinder))
     } else {
-      Ok(views.html.index(HomeController.logaccount));
+      Ok(views.html.index(HomeController.logaccount, am.readFromCSV));
     }
   }
 
@@ -69,8 +72,9 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def logout = Action {
+    val attractionList = new AttractionManager().readFromCSV
     HomeController.logaccount = Account("example@example.com", ("nothing", "none"), Profile("NOT", "NO", 1999, "NOWW", "None"), false);
-    Ok(views.html.index(null))
+    Ok(views.html.index(null, attractionList))
   }
 
   def place(id: String) = Action {
@@ -81,6 +85,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     * Collects the information from the registration form to create an account
     */
   def afteredit = Action { implicit request =>
+    val attractionList = new AttractionManager().readFromCSV
     val newProfile = Profile(request.body.asFormUrlEncoded.get("firstname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("lastname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("birthyear").head.toInt,
@@ -94,16 +99,17 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     val am = new AccountManager
     am.writeToCSV(am.editAccount(HomeController.logaccount, newAccount));
     HomeController.logaccount = newAccount;
-    Ok(views.html.index(newAccount));
+    Ok(views.html.index(newAccount, attractionList));
   }
   def aftereditpass = Action { implicit request =>
     val am = new AccountManager
+    val attractionList = new AttractionManager().readFromCSV
     if (request.body.asFormUrlEncoded.get("password").head == request.body.asFormUrlEncoded.get("password2").head) {
       am.writeToCSV(am.editAccount(HomeController.logaccount, HomeController.logaccount.changePassword(
         request.body.asFormUrlEncoded.get("password").head
       )));
       HomeController.logaccount.changePassword(request.body.asFormUrlEncoded.get("password").head)
-      Ok(views.html.index(HomeController.logaccount))
+      Ok(views.html.index(HomeController.logaccount, attractionList))
     } else {
       Ok(views.html.changepassword("PASSWORDS MUST MATCH"))
     }
@@ -127,6 +133,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
   def after = Action { implicit request =>
     val am = new AccountManager
+    val attractionList = new AttractionManager().readFromCSV
     val newProfile = Profile(request.body.asFormUrlEncoded.get("firstname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("lastname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("birthyear").head.toInt,
@@ -140,13 +147,14 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     System.out.println(newAccount);
     am.writeToCSV(am.addAccount(newAccount))
     HomeController.logaccount = newAccount;
-    Ok(views.html.index(newAccount))
+    Ok(views.html.index(newAccount, attractionList))
   }
 
   /**
     * Logic for verifying a correct login with the correct password and email
     */
   def afterlogin = Action { implicit request =>
+    val attractionList = new AttractionManager().readFromCSV
     val email = request.body.asFormUrlEncoded.get("email").head
     val password = request.body.asFormUrlEncoded.get("password").head
     System.out.println(email);
@@ -156,7 +164,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       case None => Ok(views.html.login("INCORRECT PASSWORD"))
       case Some(userAccount) => {
         HomeController.logaccount = userAccount
-        Ok(views.html.index(userAccount))
+        Ok(views.html.index(userAccount, attractionList))
         //HomeController.logaccount.changeEmail(userAccount.email)
 
       }
