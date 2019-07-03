@@ -162,7 +162,7 @@ jQuery(document).ready(function($) {
 			$('.nonloop-block-13').owlCarousel({
 		    center: false,
 		    items: 1,
-		    loop: false,
+		    loop: true,
 				stagePadding: 0,
 		    margin: 20,
 		    autoplay: true,

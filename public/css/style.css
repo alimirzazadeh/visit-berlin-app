@@ -1299,3 +1299,9 @@ a {
   .container-login100 {
     background-attachment: fixed;
   }
+
+  .height-clipper {
+      height: 100%;
+      max-height: 200px;
+      min-width: 100%;
+  }
