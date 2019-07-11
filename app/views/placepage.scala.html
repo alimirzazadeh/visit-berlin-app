@@ -104,9 +104,38 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center pt-4">
-                <a href="" id="reviewbtn">Write your own review</a>
-            </div>
+        </div>
+
+        <div id="form" class="text-center pt-4">
+            <form class="login100-form validate-form" action="/afterlogin" method=POST>
+                <span class="login100-form-logo">
+                </span>
+
+                <span class="login100-form-title mt-4 p-b-34 p-t-27">
+                    Create Review
+                </span>
+
+                <div class="wrap-input100 validate-input" data-validate = "Review Title">
+                    <input class="input100" type="email" name="email" placeholder="Review Title">
+                    <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate = "rating">
+                    <input class="input100" min="1" max="5" type="number" name="rating" placeholder="5">
+                    <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input mt-5" data-validate = "New Description">
+                    <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                    <textarea name="description" rows="10" cols="50%">Enter description</textarea>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn">
+                        Submit
+                    </button>
+                </div>
+            </form>
         </div>
 
         <footer class="site-footer">
