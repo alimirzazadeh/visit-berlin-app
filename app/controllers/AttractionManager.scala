@@ -26,15 +26,9 @@ class AttractionManager {
     }
   }
 
-  /*
-  -change it to ^ separated
-  -get rid of new lines
-
-   */
-
   def writeToCSV(attractions: List[Attraction]): Unit = {
     val writer = new PrintWriter(new File(AttractionManager.filename))
-    writer.write("name^pictureURL^description^location^attractionID\n")
+    writer.write("attractionID^name^pictureURL^description^location\n")
     for (attraction <- attractions) {
       val currentAttraction = attraction.toList
       for (item <- 0 to 3) writer.write(currentAttraction(item).replaceAll("\\s", " ") + "^")

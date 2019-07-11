@@ -39,7 +39,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     val am = new AttractionManager();
     var attraction = am.attractionFromName(id);
     if (attraction == null) {
-      attraction = new Attraction("a","a","a","a")
+      attraction = Attraction("a","a","a","a")
     }
     Ok(views.html.changepages(null, assetsFinder, attraction))
   }
@@ -116,7 +116,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   def afterEditAttraction = Action { implicit request =>
     val am = new AttractionManager
     val oldPage = am.attractionFromName(request.body.asFormUrlEncoded.get("oldName").head)
-    val newPage = new Attraction(request.body.asFormUrlEncoded.get("name").head, //change thiss!!!!!!
+    val newPage = Attraction(request.body.asFormUrlEncoded.get("name").head, //change thiss!!!!!!
       request.body.asFormUrlEncoded.get("pictureURL").head, request.body.asFormUrlEncoded.get("description").head,
       request.body.asFormUrlEncoded.get("location").head)
     if (oldPage.name == "a")
