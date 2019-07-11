@@ -74,6 +74,9 @@
                     </div>
                 </div>
             </div>
+            <div class="text-center">
+                @if(accountlogged != null && accountlogged.admin) {<a href="@routes.HomeController.changepage(attraction.name)">Edit Page</a>}
+            </div>
         </div>
 
 
