@@ -17,6 +17,10 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.hello())
   }
 
+  def createReview = Action {
+    Ok(views.html.createreview("", false))
+  }
+
   def before = Action {
     Ok(views.html.hello())
   }

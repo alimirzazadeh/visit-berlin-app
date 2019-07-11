@@ -9,6 +9,7 @@ GET /place/:id controllers.HomeController.place(id: String)
 GET /after controllers.HomeController.before
 GET /changepassword controllers.HomeController.changepassword
 GET /account controllers.HomeController.manageAccount
+GET /createreview controllers.HomeController.createReview
 GET /changepages/:id controllers.HomeController.changepage(id: String)
 + nocsrf
 POST /afterlogin controllers.HomeController.afterlogin
