@@ -1,6 +1,6 @@
 package controllers
 
-case class Review(title: String, body: String, authorEmail: String, attractionID: Int) {
+case class Review(title: String, body: String, authorEmail: String, rating: Int, attractionID: Int) {
 
 
   //give attractions id numbers

@@ -12,7 +12,7 @@ class AttractionManager {
         /*Different indexes in the info list are specific pieces of information in the csv file.
          *This allows the csv file to make sense when looked at by a human, as everything is in order
          */
-        createList(Attraction(info(0), info(1), info(2), info(3)) :: attractionList, csvInfo)
+        createList(Attraction(info(0).toInt, info(1), info(2), info(3), info(4)) :: attractionList, csvInfo)
       }
       else
         attractionList
@@ -32,13 +32,13 @@ class AttractionManager {
 
    */
 
-  def writeToCSV(attractionList: List[Attraction]): Unit = {
+  def writeToCSV(attractions: List[Attraction]): Unit = {
     val writer = new PrintWriter(new File(AttractionManager.filename))
-    writer.write("name^pictureURL^description^location\n")
-    for (attraction <- attractionList) {
+    writer.write("name^pictureURL^description^location^attractionID\n")
+    for (attraction <- attractions) {
       val currentAttraction = attraction.toList
-      for (item <- 0 to 2) writer.write(currentAttraction(item).replaceAll("\\s", " ") + "^")
-      writer.write(currentAttraction(3) + '\n')
+      for (item <- 0 to 3) writer.write(currentAttraction(item).replaceAll("\\s", " ") + "^")
+      writer.write(currentAttraction(4) + '\n')
     }
     writer.close()
   }
@@ -80,7 +80,7 @@ object AttractionManager {
 
   def main(args: Array[String]): Unit = {
     val am = new AttractionManager()
-    am.addAttraction(new Attraction("test", "test", "test", "test"))
+    am.addAttraction(Attraction("test", "test", "test", "test"))
   }
 
 }
