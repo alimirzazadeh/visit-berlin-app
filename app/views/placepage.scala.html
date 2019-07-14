@@ -75,7 +75,9 @@
                 </div>
             </div>
             <div class="text-center">
-                @if(accountlogged != null && accountlogged.admin) {<a href="@routes.HomeController.changepage(attraction.name)">Edit Page</a>}
+                @if(accountlogged != null && accountlogged.admin) {
+                    <a href="@routes.HomeController.changepage(attraction.name)">Edit Page</a>
+                }
             </div>
         </div>
 
@@ -92,22 +94,19 @@
                                     <p>&ldquo;@review.body&rdquo;</p>
                                     <p class="small">&mdash; @review.authorEmail</p>
                                     @if(accountlogged.admin) {
-                                        <a href="@routes.HomeController.deleteReview(review.title)">Delete This Review</a>
+                                        <a id="deletereview" href="/deleteReview/@review.title">Delete This Review</a>
                                     }
                                 </div>
                             }
                             <div class="block-testimony">
-                                <img src="@routes.Assets.versioned("images/person_1.jpg")" alt="Image" class="img-fluid">
                                 <p>&ldquo;As warm and welcoming as Scala's documentation!&rdquo;</p>
                                 <p class="small">&mdash; Marrygrace Woodland</p>
                             </div>
                             <div class="block-testimony">
-                                <img src="@routes.Assets.versioned("images/person_2.jpg")" alt="Image" class="img-fluid">
                                 <p>&ldquo;Machine Learning is the new Electricity? @attraction.name is the new Disney Land!&rdquo;</p>
                                 <p class="small">&mdash; Jean Doe</p>
                             </div>
                             <div class="block-testimony">
-                                <img src="@routes.Assets.versioned("images/person_3.jpg")" alt="Image" class="img-fluid">
                                 <p>&ldquo;My cat loved it&rdquo;</p>
                                 <p class="small">&mdash; Ben Smith</p>
                             </div>

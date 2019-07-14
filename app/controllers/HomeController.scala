@@ -136,8 +136,9 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   def deleteReview(id: String) = Action {
     val rm = new ReviewManager()
     val attMan = new AttractionManager()
+    val attraction = attMan.attractionFromID(rm.reviewFromTitle(id).associatedID)
     rm.writeToCSV(rm.removeReview(rm.reviewFromTitle(id)))
-    Ok(views.html.placepage("Account", assetsFinder, attMan.attractionFromID(rm.reviewFromTitle(id).associatedID), HomeController.logaccount, rm.supplyReviews(rm.reviewFromTitle(id).associatedID)))
+    Ok(views.html.placepage("Account", assetsFinder, attraction, HomeController.logaccount, rm.supplyReviews(attraction.attractionID)))
   }
 
   def afterEditAttraction = Action { implicit request =>
