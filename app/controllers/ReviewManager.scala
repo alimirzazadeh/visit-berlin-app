@@ -48,6 +48,12 @@ class ReviewManager {
     reviews.exists(_.title == review.title)
   }
 
+  def reviewFromTitle(title: String): Review = {
+    val foundReviews = readFromCSV.filter(_.title == title)
+    if (foundReviews.nonEmpty) foundReviews.head
+    else null
+  }
+
   def removeReview(review: Review): List[Review] = {
     val reviews = readFromCSV
     val updatedReviews = if (!findReview(reviews, review)) reviews else reviews.filter(_.title != review.title)
@@ -65,7 +71,7 @@ class ReviewManager {
     val updatedReviews = reviews.filter(_.associatedID == attractionID)
     updatedReviews
   }
-  
+
   def averageReviewScore(attractionID: Int): Double = {
     val specificReviews = supplyReviews(attractionID)
     val averageScore = specificReviews.reduce((r1, r2) => r1.score + r2.score) / specificReviews.length
