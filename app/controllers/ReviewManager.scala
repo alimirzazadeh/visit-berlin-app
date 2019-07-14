@@ -72,6 +72,12 @@ class ReviewManager {
     updatedReviews
   }
 
+  def reviewsByEmail(email: String): List[Review] = {
+    val reviews = readFromCSV
+    val updatedReviews = reviews.filter(_.authorEmail == email)
+    updatedReviews
+  }
+
 //  def averageReviewScore(attractionID: Int): Double = {
 //    val specificReviews = supplyReviews(attractionID)
 //    val averageScore = specificReviews.reduce((r1, r2) => r1.score + r2.score) / specificReviews.length
