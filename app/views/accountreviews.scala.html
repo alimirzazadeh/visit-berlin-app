@@ -1,0 +1,44 @@
+@(tried: String, falseRegistration: Boolean)
+@main("Edit Reviews") {
+    <section id="loginbox text-center justify-content-center">
+        <div class="limiter">
+            <div class="container-login100" style="background-image: url(@routes.Assets.versioned("/images/bg-01.jpg"));">
+                <div class="wrap-login100">
+                    <a href="@routes.HomeController.index()" style="color: white">Back to Home</a>
+                    <form class="login100-form validate-form" action="/afterReview" method=POST>
+                        <span class="login100-form-title mt-4 p-b-34 p-t-27">
+                            Edit Review
+                        </span>
+                        <select>
+                            <option value="review">Edit Review</option>
+                        </select>
+                        <input type="hidden" name="attractionID" value="">
+                        <input type="hidden" name="authorEmail" value="">
+                        <div class="wrap-input100 validate-input" data-validate = "Review Title">
+                            <input class="input100" type="text" name="title" placeholder="Review Title">
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate = "rating">
+                            <input class="input100" min="1" max="5" type="number" name="rating" placeholder="Rating (out of 5)">
+                        </div>
+                        <textarea name="body" rows="10" class="mb-2" cols="50%">Enter Description</textarea>
+
+
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="dropDownSelect1"></div>
+        <script>
+            @if(falseRegistration) {
+                alert("The email you have attempted to register already exists.");
+            }
+        </script>
+    </section>
+}
