@@ -74,7 +74,7 @@ class ReviewManager {
 
   def averageReviewScore(attractionID: Int): Double = {
     val specificReviews = supplyReviews(attractionID)
-    val averageScore = specificReviews.reduce((r1, r2) => r1.score + r2.score) / specificReviews.length
+    val averageScore = specificReviews.map(_.score).sum / specificReviews.length.asInstanceOf[Double]
     averageScore
   }
 }
@@ -83,7 +83,6 @@ object ReviewManager {
   val filename: String = "public/reviews.csv"
 
   def main(args: Array[String]): Unit = {
-    val rm = new ReviewManager
-
+    val revMan = new ReviewManager
   }
 }
