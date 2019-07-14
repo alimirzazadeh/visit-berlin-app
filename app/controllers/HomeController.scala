@@ -118,7 +118,13 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def afterReview = Action { implicit request =>
-    //put stuff here
+    val rm = new ReviewManager()
+    val attman = new AttractionManager()
+    val review = new Review(request.body.asFormUrlEncoded.get("title").head, request.body.asFormUrlEncoded.get("body").head,
+      request.body.asFormUrlEncoded.get("authorEmail").head, request.body.asFormUrlEncoded.get("rating").head.toInt,
+      request.body.asFormUrlEncoded.get("attractionID").head.toInt)
+    rm.writeToCSV(rm.addReview(review))
+    Ok(views.html.placepage("Account", assetsFinder, attman.attractionFromID(request.body.asFormUrlEncoded.get("attractionID").head.toInt), HomeController.logaccount))
   }
 
 
@@ -132,7 +138,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       am.writeToCSV(am.addAttraction(newPage))
     else
       am.writeToCSV(am.editAttraction(oldPage, newPage))
-    Ok(views.html.placepage("idk", assetsFinder, newPage, HomeController.logaccount))
+    Ok(views.html.placepage("Account", assetsFinder, newPage, HomeController.logaccount))
   }
 
   def edit = Action {
