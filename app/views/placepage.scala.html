@@ -105,23 +105,25 @@
                 </div>
             </div>
         </div>
+        @if(accountlogged.email != "example@example.com") {
+        <div id="form" class="text-center pt-4">
+            <form class="login100-form validate-form" action="/afterReview" method=POST>
+                <span class="login100-form-logo">
+                </span>
 
-        <div id="reviewform" class="text-center pt-4">
-            <div class="container text-center justify-content-center widthreview">
-                <form class="text-center login100-form validate-form" action="/" method=POST>
-                    <span class="login100-form-title mt-4 p-b-34 p-t-27">
-                        Create Review
-                    </span>
+                <span class="login100-form-title mt-4 p-b-34 p-t-27">
+                    Create Review
+                </span>
+                <input type="hidden" name="attractionID" value=@attraction.attractionID>
+                <input type="hidden" name="authorEmail" value=@accountlogged.email>
+                <div class="wrap-input100 validate-input" data-validate = "Review Title">
+                    <input class="input100" type="text" name="title" placeholder="Review Title">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate = "rating">
+                    <input class="input100" min="1" max="5" type="number" name="rating" placeholder="5">
+                </div>
+                <textarea name="body" rows="10" class="mb-2" cols="50%">Enter Description</textarea>
 
-                    <div class="wrap-input100 validate-input" data-validate = "Review Title">
-                        <input class="input100" type="email" name="email" placeholder="Review Title">
-                    </div>
-
-                    <div class="wrap-input100 validate-input" data-validate = "rating">
-                        <input class="input100" min="1" max="5" type="number" name="rating" placeholder="5">
-                    </div>
-
-                    <textarea name="description" rows="10" class="mb-2" cols="50%">Enter description</textarea>
 
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn">
@@ -131,6 +133,7 @@
                 </form>
             </div>
         </div>
+        }
 
         <footer class="site-footer">
             <div class="container">
