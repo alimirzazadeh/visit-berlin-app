@@ -6,7 +6,6 @@ import scala.io.Source
 
 class ReviewManager {
 
-
   def readFromCSV: List[Review] = {
     def createList(reviews: List[Review], csvInfo: Iterator[String]): List[Review] = {
       if (csvInfo.hasNext) {
@@ -65,6 +64,12 @@ class ReviewManager {
     val reviews = readFromCSV
     val updatedReviews = reviews.filter(_.associatedID == attractionID)
     updatedReviews
+  }
+  
+  def averageReviewScore(attractionID: Int): Double = {
+    val specificReviews = supplyReviews(attractionID)
+    val averageScore = specificReviews.reduce((r1, r2) => r1.score + r2.score) / specificReviews.length
+    averageScore
   }
 }
 

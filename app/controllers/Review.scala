@@ -1,32 +1,32 @@
 package controllers
 
-case class Review(title: String, body: String, authorEmail: String, rating: Int, associatedID: Int) {
+case class Review(title: String, body: String, authorEmail: String, score: Int, associatedID: Int) {
 
-  require(rating >= 1 && rating <= 10)
+  require(score >= 1 && score <= 10)
 
   def changeBody(newBody: String): Review = copy(body = newBody)
 
   def changeTitle(newTitle: String): Review = copy(title = newTitle)
 
-  def changeRating(newRating: Int): Review = copy(rating = newRating)
+  def changeScore(newScore: Int): Review = copy(score = newScore)
 
   override def equals(other: Any): Boolean = {
     other match {
       case that: Review =>
         this.title == that.title && this.body == that.body &&
           this.authorEmail == that.authorEmail && this.associatedID == that.associatedID &&
-          this.rating == that.rating
+          this.score == that.score
       case _ => false
     }
   }
 
   override def toString: String = {
     s"Attraction ID: $associatedID, Author Email: $authorEmail, Review Title: $title," +
-      s"Review Body: $body, Review Score: $rating/10"
+      s"Review Body: $body, Review Score: $score/10"
   }
 
   def toList: List[String] = {
-    List(s"$associatedID", s"$authorEmail", s"$title", s"$body", s"$rating")
+    List(s"$associatedID", s"$authorEmail", s"$title", s"$body", s"$score")
   }
 
 }
