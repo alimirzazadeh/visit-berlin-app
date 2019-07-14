@@ -127,12 +127,18 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     val attraction = attman.attractionFromID(request.body.asFormUrlEncoded.get("attractionID").head.toInt)
     val review = new Review(request.body.asFormUrlEncoded.get("title").head, request.body.asFormUrlEncoded.get("body").head,
       request.body.asFormUrlEncoded.get("authorEmail").head,
-      request.body.asFormUrlEncoded.get("attractionID").head.toInt, request.body.asFormUrlEncoded.get("rating").head.toInt)
+      request.body.asFormUrlEncoded.get("attractionID").head.toInt, request.body.asFormUrlEncoded.get("score").head.toInt)
     rm.writeToCSV(rm.addReview(review))
     System.out.println(attman.attractionFromID(request.body.asFormUrlEncoded.get("attractionID").head.toInt))
     Ok(views.html.placepage("Account", assetsFinder, attraction, HomeController.logaccount, rm.supplyReviews(attraction.attractionID)))
   }
 
+  def deleteReview(id: String) = Action {
+    val rm = new ReviewManager()
+    val attMan = new AttractionManager()
+    rm.writeToCSV(rm.removeReview(rm.reviewFromTitle(id)))
+    Ok(views.html.placepage("Account", assetsFinder, attMan.attractionFromID(rm.reviewFromTitle(id).associatedID), HomeController.logaccount, rm.supplyReviews(rm.reviewFromTitle(id).associatedID)))
+  }
 
   def afterEditAttraction = Action { implicit request =>
     val attMan = new AttractionManager
