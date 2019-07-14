@@ -89,24 +89,22 @@
                         <div class="nonloop-block-13 owl-carousel">
                             @for(review <- reviews) {
                                 <div class="block-testimony">
-                                    <h5>Rating: @review.rating out of 5 stars</h5>
+                                    <h5>Rating: @review.score out of 5 stars</h5>
                                     <h5>@review.title</h5>
                                     <p>&ldquo;@review.body&rdquo;</p>
                                     <p class="small">&mdash; @review.authorEmail</p>
                                     @if(accountlogged.admin) {
-                                        <a id="deletereview" href="">Delete This Review</a>
+                                        <a id="deletereview" href="/deleteReview/@review.title">Delete This Review</a>
                                     }
                                 </div>
                             }
                             <div class="block-testimony">
                                 <p>&ldquo;As warm and welcoming as Scala's documentation!&rdquo;</p>
                                 <p class="small">&mdash; Marrygrace Woodland</p>
-                                <a id="deletereview" href="">Delete This Review</a>
                             </div>
                             <div class="block-testimony">
                                 <p>&ldquo;Machine Learning is the new Electricity? @attraction.name is the new Disney Land!&rdquo;</p>
                                 <p class="small">&mdash; Jean Doe</p>
-                                <a id="deletereview" href="">Delete This Review</a>
                             </div>
                             <div class="block-testimony">
                                 <p>&ldquo;My cat loved it&rdquo;</p>
@@ -130,7 +128,7 @@
                         <input class="input100" type="text" name="title" placeholder="Review Title">
                     </div>
                     <div class="wrap-input100 validate-input" data-validate = "rating">
-                        <input class="input100" min="1" max="5" type="number" name="rating" placeholder="Rating (out of 5)">
+                        <input class="input100" min="1" max="5" type="number" name="score" placeholder="Rating (out of 5)">
                     </div>
                     <textarea name="body" rows="10" class="mb-2" cols="50%">Enter Description</textarea>
 

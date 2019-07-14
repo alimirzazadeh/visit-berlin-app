@@ -6,6 +6,7 @@ GET /logout controllers.HomeController.logout
 GET /home controllers.HomeController.index
 GET  /assets/*file   controllers.Assets.versioned(path="/public", file)
 GET /place/:id controllers.HomeController.place(id: String)
+GET /deleteReview/:id controllers.HomeController.deleteReview(id: String)
 GET /after controllers.HomeController.before
 GET /changepassword controllers.HomeController.changepassword
 GET /account controllers.HomeController.manageAccount

@@ -1,6 +1,6 @@
 package controllers
 
-case class Review(title: String, body: String, authorEmail: String, score: Int, associatedID: Int) {
+case class Review(title: String, body: String, authorEmail: String, associatedID: Int, score: Int) {
 
   require(score >= 1 && score <= 10)
 
@@ -26,9 +26,8 @@ case class Review(title: String, body: String, authorEmail: String, score: Int, 
   }
 
   def toList: List[String] = {
-    List(s"$associatedID", s"$authorEmail", s"$title", s"$body", s"$score")
+    List(s"$title", s"$body", s"$authorEmail", s"$associatedID", s"$score")
   }
-
 }
 
 object Review {

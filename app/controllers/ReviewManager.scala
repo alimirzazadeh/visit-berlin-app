@@ -29,7 +29,7 @@ class ReviewManager {
 
   def writeToCSV(reviews: List[Review]): Unit = {
     val writer = new PrintWriter(new File(ReviewManager.filename))
-    writer.write("title^body^authorEmail^attractionID^rating\n")
+    writer.write("title^body^authorEmail^attractionID^score\n")
     for (review <- reviews) {
       val currentReview = review.toList
       for (item <- 0 to 3) writer.write(currentReview(item).replaceAll("\\s", " ") + "^")
@@ -69,6 +69,12 @@ class ReviewManager {
   def supplyReviews(attractionID: Int): List[Review] = {
     val reviews = readFromCSV
     val updatedReviews = reviews.filter(_.associatedID == attractionID)
+    updatedReviews
+  }
+
+  def reviewsByEmail(email: String): List[Review] = {
+    val reviews = readFromCSV
+    val updatedReviews = reviews.filter(_.authorEmail == email)
     updatedReviews
   }
 
