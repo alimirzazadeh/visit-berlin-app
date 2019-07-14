@@ -1319,3 +1319,11 @@ a {
     z-index: 1;
     opacity: 0%;
   }
+
+  #reviewform {
+    background-color: rgb(51, 51, 51);
+  }
+
+  .widthreview {
+    width: 50% !important;
+  }
