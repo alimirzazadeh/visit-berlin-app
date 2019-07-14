@@ -1320,10 +1320,14 @@ a {
     opacity: 0%;
   }
 
-  #reviewform {
-    background-color: rgb(51, 51, 51);
+  @media screen and (min-width: 912px) {
+    .widthreview {
+      width: 30% !important;
+    }
   }
 
-  .widthreview {
-    width: 50% !important;
+
+  #form {
+    background-color: #333333;
+    padding: 20px;
   }
