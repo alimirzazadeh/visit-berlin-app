@@ -8,16 +8,16 @@ class ReviewManager {
 
 
   def readFromCSV: List[Review] = {
-    def createList(reviewList: List[Review], csvInfo: Iterator[String]): List[Review] = {
+    def createList(reviews: List[Review], csvInfo: Iterator[String]): List[Review] = {
       if (csvInfo.hasNext) {
         val info = csvInfo.next().split('^')
         /*Different indexes in the info list are specific pieces of information in the csv file.
          *This allows the csv file to make sense when looked at by a human, as everything is in order
          */
-        createList(Review(info(0), info(1), info(2), info(3).toInt, info(4).toInt) :: reviewList, csvInfo)
+        createList(Review(info(0), info(1), info(2), info(3).toInt, info(4).toInt) :: reviews, csvInfo)
       }
       else
-        reviewList
+        reviews
     }
     val file = new File(ReviewManager.filename)
     if (file.exists())
@@ -28,10 +28,10 @@ class ReviewManager {
     }
   }
 
-  def writeToCSV(reviewList: List[Review]): Unit = {
+  def writeToCSV(reviews: List[Review]): Unit = {
     val writer = new PrintWriter(new File(AttractionManager.filename))
     writer.write("title^body^authorEmail^attractionID^rating\n")
-    for (review <- reviewList) {
+    for (review <- reviews) {
       val currentReview = review.toList
       for (item <- 0 to 3) writer.write(currentReview(item).replaceAll("\\s", " ") + "^")
       writer.write(currentReview(4) + '\n')
@@ -40,25 +40,25 @@ class ReviewManager {
   }
 
   def addReview(review: Review): List[Review] = {
-    val reviewList = readFromCSV
-    val updatedList = if (findReview(reviewList, review)) reviewList else review :: reviewList
-    updatedList
+    val reviews = readFromCSV
+    val updatedReviews = if (findReview(reviews, review)) reviews else review :: reviews
+    updatedReviews
   }
 
-  def findReview(reviewList: List[Review], review: Review): Boolean = {
-    reviewList.exists(_.title == review.title)
+  def findReview(reviews: List[Review], review: Review): Boolean = {
+    reviews.exists(_.title == review.title)
   }
 
   def removeReview(review: Review): List[Review] = {
-    val reviewList = readFromCSV
-    val updatedList = if (!findReview(reviewList, review)) reviewList else reviewList.filter(_.title != review.title)
-    updatedList
+    val reviews = readFromCSV
+    val updatedReviews = if (!findReview(reviews, review)) reviews else reviews.filter(_.title != review.title)
+    updatedReviews
   }
 
   def editReview(oldReview: Review, newReview: Review): List[Review] = {
-    val reviewList = readFromCSV
-    val updatedList = if (!findReview(reviewList, oldReview)) reviewList else newReview :: reviewList.filter(_.title != oldReview.title)
-    updatedList
+    val reviews = readFromCSV
+    val updatedReviews = if (!findReview(reviews, oldReview)) reviews else newReview :: reviews.filter(_.title != oldReview.title)
+    updatedReviews
   }
 
 

@@ -22,11 +22,11 @@ case class Attraction(attractionID: Int, name: String, pictureURL: String, descr
   }
 
   override def toString: String = {
-    s"Name: $name, Picture Address: $pictureURL, Description: $description, Location: $location, ID: $attractionID"
+    s"ID: $attractionID, Name: $name, Picture Address: $pictureURL, Description: $description, Location: $location"
   }
 
   def toList: List[String] = {
-    List(s"$name", s"$pictureURL", s"$description", s"$location", s"$attractionID")
+    List(s"$attractionID", s"$name", s"$pictureURL", s"$description", s"$location")
   }
 }
 
