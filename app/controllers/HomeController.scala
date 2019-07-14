@@ -126,8 +126,8 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     val attman = new AttractionManager()
     val attraction = attman.attractionFromID(request.body.asFormUrlEncoded.get("attractionID").head.toInt)
     val review = new Review(request.body.asFormUrlEncoded.get("title").head, request.body.asFormUrlEncoded.get("body").head,
-      request.body.asFormUrlEncoded.get("authorEmail").head, request.body.asFormUrlEncoded.get("rating").head.toInt,
-      request.body.asFormUrlEncoded.get("attractionID").head.toInt)
+      request.body.asFormUrlEncoded.get("authorEmail").head,
+      request.body.asFormUrlEncoded.get("attractionID").head.toInt, request.body.asFormUrlEncoded.get("rating").head.toInt)
     rm.writeToCSV(rm.addReview(review))
     System.out.println(attman.attractionFromID(request.body.asFormUrlEncoded.get("attractionID").head.toInt))
     Ok(views.html.placepage("Account", assetsFinder, attraction, HomeController.logaccount, rm.supplyReviews(attraction.attractionID)))
