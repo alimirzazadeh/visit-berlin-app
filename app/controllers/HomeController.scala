@@ -17,6 +17,10 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.hello())
   }
 
+  def createReview = Action {
+    Ok(views.html.createreview("", false))
+  }
+
   def before = Action {
     Ok(views.html.hello())
   }
@@ -71,13 +75,16 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
 
   def logout = Action {
     val attractions = new AttractionManager().readFromCSV
-    HomeController.logaccount = Account("example@example.com", ("nothing", "none"), Profile("NOT", "NO", 1999, "NOWW", "None"), false);
+    HomeController.logaccount = Account("example@example.com", ("nothing", "none"), Profile("NOT", "NO", 1999, "NOWW", "None"), false)
     Ok(views.html.index(null, attractions))
   }
 
   def place(id: String) = Action {
-    val attMan = new AttractionManager();
-    Ok(views.html.placepage("Account", assetsFinder, attMan.attractionFromName(id), HomeController.logaccount))
+    val attMan = new AttractionManager()
+    val revMan = new ReviewManager()
+    val attraction = attMan.attractionFromName(id)
+    Ok(views.html.placepage("Account", assetsFinder, attraction, HomeController.logaccount, revMan.supplyReviews(attraction.attractionID)))
+      //change this to id instead of name eventually
   }
   /**
     * Collects the information from the registration form to create an account
@@ -114,8 +121,22 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     }
   }
 
+  def afterReview = Action { implicit request =>
+    val rm = new ReviewManager()
+    val attman = new AttractionManager()
+    val attraction = attman.attractionFromID(request.body.asFormUrlEncoded.get("attractionID").head.toInt)
+    val review = new Review(request.body.asFormUrlEncoded.get("title").head, request.body.asFormUrlEncoded.get("body").head,
+      request.body.asFormUrlEncoded.get("authorEmail").head,
+      request.body.asFormUrlEncoded.get("attractionID").head.toInt, request.body.asFormUrlEncoded.get("rating").head.toInt)
+    rm.writeToCSV(rm.addReview(review))
+    System.out.println(attman.attractionFromID(request.body.asFormUrlEncoded.get("attractionID").head.toInt))
+    Ok(views.html.placepage("Account", assetsFinder, attraction, HomeController.logaccount, rm.supplyReviews(attraction.attractionID)))
+  }
+
+
   def afterEditAttraction = Action { implicit request =>
     val attMan = new AttractionManager
+    val rm = new ReviewManager
     val oldPage = attMan.attractionFromName(request.body.asFormUrlEncoded.get("oldName").head)
     val newPage = Attraction(request.body.asFormUrlEncoded.get("name").head, //change thiss!!!!!!
       request.body.asFormUrlEncoded.get("pictureURL").head, request.body.asFormUrlEncoded.get("description").head,
@@ -124,7 +145,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       attMan.writeToCSV(attMan.addAttraction(newPage))
     else
       attMan.writeToCSV(attMan.editAttraction(oldPage, newPage))
-    Ok(views.html.placepage("idk", assetsFinder, newPage, HomeController.logaccount))
+      Ok(views.html.placepage("idk", assetsFinder, newPage, HomeController.logaccount, rm.supplyReviews(newPage.attractionID)))
   }
 
   def edit = Action {

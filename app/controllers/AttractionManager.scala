@@ -59,6 +59,12 @@ class AttractionManager {
     attractions.exists(_.name == attraction.name)
   }
 
+  def attractionFromID(id: Int): Attraction = {
+    val foundAttractions = readFromCSV.filter(_.attractionID == id)
+    if (foundAttractions.nonEmpty) foundAttractions.head
+    else null
+  }
+
   def attractionFromName(name: String): Attraction = {
     val foundAttractions = readFromCSV.filter(_.name == name)
     if (foundAttractions.nonEmpty) foundAttractions.head
