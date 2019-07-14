@@ -22,11 +22,11 @@ class AccountManager {
     /**
       * Takes a line from a csv file string iterator and converts it into an account object, which
       * is then added to a list and returned
-      * @param accList current list of account objects
+      * @param accounts current list of account objects
       * @param csvInfo the iterator for the csv file
       * @return an updated list of accounts after one iteration from the iterator
       */
-    def createList(accList: List[Account], csvInfo: Iterator[String]): List[Account] = {
+    def createList(accounts: List[Account], csvInfo: Iterator[String]): List[Account] = {
       if (csvInfo.hasNext) {
         val info = csvInfo.next().split(",")
         /*Different indexes in the info list are specific pieces of information in the csv file,
@@ -35,10 +35,10 @@ class AccountManager {
          */
         val isAdmin = info(3) == "true"
         createList(Account(info(0), (info(1), info(2)),
-          Profile(info(4), info(5), info(6).toInt, info(7), info(8)), isAdmin) :: accList, csvInfo)
+          Profile(info(4), info(5), info(6).toInt, info(7), info(8)), isAdmin) :: accounts, csvInfo)
       }
       else
-        accList
+        accounts
     }
     val file = new File(AccountManager.filename)
     if (file.exists())
@@ -51,12 +51,12 @@ class AccountManager {
 
   /**
     * Takes a list of accounts and writes them into a csv file
-    * @param accList A list of account objects
+    * @param accounts A list of account objects
     */
-  def writeToCSV(accList: List[Account]): Unit = {
+  def writeToCSV(accounts: List[Account]): Unit = {
     val writer = new PrintWriter(new File(AccountManager.filename))
     writer.write("email,passwordHash,salt,admin,firstName,lastName,birthYear,hometown,interests\n")
-    for (account <- accList) {
+    for (account <- accounts) {
       val currentAcc = account.toList
       val currentProf = account.profile.toList
       for (item <- 0 to 3) writer.write(currentAcc(item) + ",")
@@ -74,9 +74,9 @@ class AccountManager {
     *         including the new account
     */
   def addAccount(acc: Account): List[Account] = {
-    val accList = readFromCSV
-    val updatedList = if (findAccount(accList, acc)) accList else acc :: accList
-    updatedList
+    val accounts = readFromCSV
+    val updatedAccounts = if (findAccount(accounts, acc)) accounts else acc :: accounts
+    updatedAccounts
   }
 
   /**
@@ -86,9 +86,9 @@ class AccountManager {
     *         doesn't exist, return the original list
     */
   def removeAccount(acc: Account): List[Account] = {
-    val accList = readFromCSV
-    val updatedList = if (!findAccount(accList, acc)) accList else accList.filter(_.email != acc.email)
-    updatedList
+    val accounts = readFromCSV
+    val updatedAccounts = if (!findAccount(accounts, acc)) accounts else accounts.filter(_.email != acc.email)
+    updatedAccounts
   }
 
   /**
@@ -99,19 +99,19 @@ class AccountManager {
     * @return an updated list of accounts after removing oldAcc and adding newAcc
     */
   def editAccount(oldAcc: Account, newAcc: Account): List[Account] = {
-    val accList = readFromCSV
-    val updatedList = if (!findAccount(accList, oldAcc)) accList else newAcc :: accList.filter(_.email != oldAcc.email)
-    updatedList
+    val accounts = readFromCSV
+    val updatedAccounts = if (!findAccount(accounts, oldAcc)) accounts else newAcc :: accounts.filter(_.email != oldAcc.email)
+    updatedAccounts
   }
 
   /**
     * Decides whether an account exists in an account list based off of the account email
-    * @param accList the list of accounts to be searched
+    * @param accounts the list of accounts to be searched
     * @param account the account that may be found by the method
-    * @return true if the account exists in the accList, otherwise return false
+    * @return true if the account exists in the accounts, otherwise return false
     */
-  def findAccount(accList: List[Account], account: Account): Boolean = {
-    accList.exists(_.email == account.email)
+  def findAccount(accounts: List[Account], account: Account): Boolean = {
+    accounts.exists(_.email == account.email)
   }
 
   /**
@@ -122,8 +122,8 @@ class AccountManager {
     * @return an option that either contains the account if credentials match or None otherwise
     */
   def verifyLogin(email: String, password: String): Option[Account] = {
-    val accList = readFromCSV
-    val matchList = accList.filter(_.email == email)
+    val accounts = readFromCSV
+    val matchList = accounts.filter(_.email == email)
     if (matchList.isEmpty) None else {
       val checkAccount = matchList.head
       if (Account.hashPassword(password, checkAccount.saltedHash._2) != checkAccount.saltedHash._1) None else
@@ -156,8 +156,6 @@ object AccountManager {
     * @param args argument Strings potentially provided to name
     */
   def main(args: Array[String]): Unit = {
-    val am = new AccountManager
-    val a1 = Account("tam@gmail.com", Account.hashPasswordPlusSalt("testPassword"),
-      Profile("TYLER","SCARAMASTRO",1999,"Tennessee","Nothing lol"), admin=true)
+    val accMan = new AccountManager
   }
 }

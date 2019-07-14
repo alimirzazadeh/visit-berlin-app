@@ -27,17 +27,18 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
 
   // Home Page
   def index = Action {
-    val am = new AttractionManager()
+    val attMan = new AttractionManager()
+    attMan.createDefaultAttractions()
     if (HomeController.logaccount.email == "example@example.com") {
-      Ok(views.html.index(null, am.readFromCSV))
+      Ok(views.html.index(null, attMan.readFromCSV))
     } else {
-      Ok(views.html.index(HomeController.logaccount, am.readFromCSV))
+      Ok(views.html.index(HomeController.logaccount, attMan.readFromCSV))
     }
   }
 
   def changepage(id: String) = Action {
-    val am = new AttractionManager();
-    var attraction = am.attractionFromName(id);
+    val attMan = new AttractionManager();
+    var attraction = attMan.attractionFromName(id);
     if (attraction == null) {
       attraction = Attraction("a","a","a","a")
     }
@@ -45,19 +46,19 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def manageAccount = Action {
-    val am = new AttractionManager()
+    val attMan = new AttractionManager()
     if (HomeController.logaccount.email != "example@example.com") {
       Ok(views.html.manageAccount(HomeController.logaccount, assetsFinder))
     } else {
-      Ok(views.html.index(null, am.readFromCSV))
+      Ok(views.html.index(null, attMan.readFromCSV))
     }
   }
 
   def register = Action {
-    val am = new AttractionManager
+    val attMan = new AttractionManager
     if (HomeController.logaccount.email == "example@example.com") Ok(views.html.register(
       assetsFinder, wrongAdminPassword = false)) else
-      Ok(views.html.index(HomeController.logaccount, am.readFromCSV))
+      Ok(views.html.index(HomeController.logaccount, attMan.readFromCSV))
   }
 
   def login = Action {
@@ -69,20 +70,20 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def logout = Action {
-    val attractionList = new AttractionManager().readFromCSV
+    val attractions = new AttractionManager().readFromCSV
     HomeController.logaccount = Account("example@example.com", ("nothing", "none"), Profile("NOT", "NO", 1999, "NOWW", "None"), false);
-    Ok(views.html.index(null, attractionList))
+    Ok(views.html.index(null, attractions))
   }
 
   def place(id: String) = Action {
-    val am = new AttractionManager();
-    Ok(views.html.placepage("Account", assetsFinder, am.attractionFromName(id), HomeController.logaccount))
+    val attMan = new AttractionManager();
+    Ok(views.html.placepage("Account", assetsFinder, attMan.attractionFromName(id), HomeController.logaccount))
   }
   /**
     * Collects the information from the registration form to create an account
     */
   def afteredit = Action { implicit request =>
-    val attractionList = new AttractionManager().readFromCSV
+    val attractions = new AttractionManager().readFromCSV
     val newProfile = Profile(request.body.asFormUrlEncoded.get("firstname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("lastname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("birthyear").head.toInt,
@@ -93,36 +94,36 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       newProfile,
       // Change this to check user input match to the admin password's salt-free hash
       admin = true)
-    val am = new AccountManager
-    am.writeToCSV(am.editAccount(HomeController.logaccount, newAccount));
+    val accMan = new AccountManager
+    accMan.writeToCSV(accMan.editAccount(HomeController.logaccount, newAccount));
     HomeController.logaccount = newAccount;
-    Ok(views.html.index(newAccount, attractionList));
+    Ok(views.html.index(newAccount, attractions));
   }
 
   def aftereditpass = Action { implicit request =>
-    val am = new AccountManager
-    val attractionList = new AttractionManager().readFromCSV
+    val accMan = new AccountManager
+    val attractions = new AttractionManager().readFromCSV
     if (request.body.asFormUrlEncoded.get("password").head == request.body.asFormUrlEncoded.get("password2").head) {
-      am.writeToCSV(am.editAccount(HomeController.logaccount, HomeController.logaccount.changePassword(
+      accMan.writeToCSV(accMan.editAccount(HomeController.logaccount, HomeController.logaccount.changePassword(
         request.body.asFormUrlEncoded.get("password").head
       )));
       HomeController.logaccount.changePassword(request.body.asFormUrlEncoded.get("password").head)
-      Ok(views.html.index(HomeController.logaccount, attractionList))
+      Ok(views.html.index(HomeController.logaccount, attractions))
     } else {
       Ok(views.html.changepassword("PASSWORDS MUST MATCH"))
     }
   }
 
   def afterEditAttraction = Action { implicit request =>
-    val am = new AttractionManager
-    val oldPage = am.attractionFromName(request.body.asFormUrlEncoded.get("oldName").head)
+    val attMan = new AttractionManager
+    val oldPage = attMan.attractionFromName(request.body.asFormUrlEncoded.get("oldName").head)
     val newPage = Attraction(request.body.asFormUrlEncoded.get("name").head, //change thiss!!!!!!
       request.body.asFormUrlEncoded.get("pictureURL").head, request.body.asFormUrlEncoded.get("description").head,
       request.body.asFormUrlEncoded.get("location").head)
     if (oldPage.name == "a")
-      am.writeToCSV(am.addAttraction(newPage))
+      attMan.writeToCSV(attMan.addAttraction(newPage))
     else
-      am.writeToCSV(am.editAttraction(oldPage, newPage))
+      attMan.writeToCSV(attMan.editAttraction(oldPage, newPage))
     Ok(views.html.placepage("idk", assetsFinder, newPage, HomeController.logaccount))
   }
 
@@ -131,8 +132,8 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
   }
 
   def after = Action { implicit request =>
-    val am = new AccountManager
-    val attractionList = new AttractionManager().readFromCSV
+    val accMan = new AccountManager
+    val attractions = new AttractionManager().readFromCSV
     val newProfile = Profile(request.body.asFormUrlEncoded.get("firstname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("lastname").head.toUpperCase,
       request.body.asFormUrlEncoded.get("birthyear").head.toInt,
@@ -146,12 +147,12 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       newProfile, adminInput == AccountManager.adminHash)
     if (adminInput != "password" && adminInput != AccountManager.adminHash) {
       Ok(views.html.register(assetsFinder, true))
-    } else if (am.findAccount(am.readFromCSV, newAccount)) {
+    } else if (accMan.findAccount(accMan.readFromCSV, newAccount)) {
       Ok(views.html.login(null, true))
     } else {
-      am.writeToCSV(am.addAccount(newAccount))
+      accMan.writeToCSV(accMan.addAccount(newAccount))
       HomeController.logaccount = newAccount
-      Ok(views.html.index(newAccount, attractionList))
+      Ok(views.html.index(newAccount, attractions))
     }
   }
 
@@ -159,16 +160,16 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     * Logic for verifying a correct login with the correct password and email
     */
   def afterlogin = Action { implicit request =>
-    val attractionList = new AttractionManager().readFromCSV
+    val attractions = new AttractionManager().readFromCSV
     val email = request.body.asFormUrlEncoded.get("email").head
     val password = request.body.asFormUrlEncoded.get("password").head
-    val am = new AccountManager
-    val accountTest = am.verifyLogin(email, password)
+    val accMan = new AccountManager
+    val accountTest = accMan.verifyLogin(email, password)
     accountTest match {
       case None => Ok(views.html.login("INCORRECT PASSWORD", falseRegistration = false))
       case Some(userAccount) =>
         HomeController.logaccount = userAccount
-        Ok(views.html.index(userAccount, attractionList))
+        Ok(views.html.index(userAccount, attractions))
         //HomeController.logaccount.changeEmail(userAccount.email)
 
       }
