@@ -1,6 +1,6 @@
 package controllers
 
-case class Review(title: String, body: String, authorEmail: String, rating: Int, attractionID: Int) {
+case class Review(title: String, body: String, authorEmail: String, rating: Int, associatedID: Int) {
 
   require(rating >= 1 && rating <= 10)
 
@@ -14,19 +14,19 @@ case class Review(title: String, body: String, authorEmail: String, rating: Int,
     other match {
       case that: Review =>
         this.title == that.title && this.body == that.body &&
-          this.authorEmail == that.authorEmail && this.attractionID == that.attractionID &&
+          this.authorEmail == that.authorEmail && this.associatedID == that.associatedID &&
           this.rating == that.rating
       case _ => false
     }
   }
 
   override def toString: String = {
-    s"Attraction ID: $attractionID, Author Email: $authorEmail, Review Title: $title," +
+    s"Attraction ID: $associatedID, Author Email: $authorEmail, Review Title: $title," +
       s"Review Body: $body, Review Score: $rating/10"
   }
 
   def toList: List[String] = {
-    List(s"$attractionID", s"$authorEmail", s"$title", s"$body", s"$rating")
+    List(s"$associatedID", s"$authorEmail", s"$title", s"$body", s"$rating")
   }
 
 }

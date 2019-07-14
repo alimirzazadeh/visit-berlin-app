@@ -61,8 +61,11 @@ class ReviewManager {
     updatedReviews
   }
 
-
-
+  def supplyReviews(attractionID: Int): List[Review] = {
+    val reviews = readFromCSV
+    val updatedReviews = reviews.filter(_.associatedID == attractionID)
+    updatedReviews
+  }
 }
 
 object ReviewManager {
