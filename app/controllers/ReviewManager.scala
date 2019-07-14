@@ -29,7 +29,7 @@ class ReviewManager {
   }
 
   def writeToCSV(reviews: List[Review]): Unit = {
-    val writer = new PrintWriter(new File(AttractionManager.filename))
+    val writer = new PrintWriter(new File(ReviewManager.filename))
     writer.write("title^body^authorEmail^attractionID^rating\n")
     for (review <- reviews) {
       val currentReview = review.toList
