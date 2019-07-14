@@ -117,6 +117,11 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     }
   }
 
+  def afterReview = Action { implicit request =>
+    //put stuff here
+  }
+
+
   def afterEditAttraction = Action { implicit request =>
     val am = new AttractionManager
     val oldPage = am.attractionFromName(request.body.asFormUrlEncoded.get("oldName").head)

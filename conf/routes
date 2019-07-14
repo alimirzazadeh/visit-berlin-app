@@ -23,3 +23,5 @@ POST /afteredit controllers.HomeController.afteredit
 POST /aftereditpass controllers.HomeController.aftereditpass
 + nocsrf
 POST /afterEditAttraction controllers.HomeController.afterEditAttraction
++ nocsrf
+POST /afterReview controllers.HomeController.afterReview

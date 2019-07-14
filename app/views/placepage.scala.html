@@ -107,14 +107,14 @@
         </div>
 
         <div id="form" class="text-center pt-4">
-            <form class="login100-form validate-form" action="/afterlogin" method=POST>
+            <form class="login100-form validate-form" action="/afterReview" method=POST>
                 <span class="login100-form-logo">
                 </span>
 
                 <span class="login100-form-title mt-4 p-b-34 p-t-27">
                     Create Review
                 </span>
-
+                <input type="hidden" name="attractionID" value=@attraction.attractionID>
                 <div class="wrap-input100 validate-input" data-validate = "Review Title">
                     <input class="input100" type="email" name="email" placeholder="Review Title">
                     <span class="focus-input100" data-placeholder="&#xf207;"></span>
