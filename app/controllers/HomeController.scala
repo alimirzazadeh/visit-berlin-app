@@ -79,6 +79,11 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.index(null, attractions))
   }
 
+  def editReviews(id: String) = Action {
+    val revMan = new ReviewManager()
+    Ok(views.html.accountreviews(revMan.reviewsByEmail(id)))
+  }
+
   def place(id: String) = Action {
     val attMan = new AttractionManager()
     val revMan = new ReviewManager()
@@ -131,6 +136,22 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     rm.writeToCSV(rm.addReview(review))
     System.out.println(attman.attractionFromID(request.body.asFormUrlEncoded.get("attractionID").head.toInt))
     Ok(views.html.placepage("Account", assetsFinder, attraction, HomeController.logaccount, rm.supplyReviews(attraction.attractionID)))
+  }
+
+  def afterEditReview = Action { implicit request =>
+    val revMan = new ReviewManager()
+    val attMan = new AttractionManager()
+    System.out.println(request.body.asFormUrlEncoded)
+    for(i <- 0 to request.body.asFormUrlEncoded.get("numberReviews").head.toInt - 1) {
+      var oldReview = new Review(request.body.asFormUrlEncoded.get("oldTitle")(i),
+        request.body.asFormUrlEncoded.get("oldBody")(i), request.body.asFormUrlEncoded.get("authorEmail")(i),
+        request.body.asFormUrlEncoded.get("associatedID")(i).toInt, request.body.asFormUrlEncoded.get("oldRating")(i).toInt)
+      var newReview = new Review(request.body.asFormUrlEncoded.get("title")(i),
+        request.body.asFormUrlEncoded.get("body")(i), request.body.asFormUrlEncoded.get("authorEmail")(i),
+        request.body.asFormUrlEncoded.get("associatedID")(i).toInt, request.body.asFormUrlEncoded.get("score")(i).toInt)
+      revMan.writeToCSV(revMan.editReview(oldReview, newReview))
+    }
+    Ok(views.html.index(HomeController.logaccount, attMan.readFromCSV))
   }
 
   def deleteReview(id: String) = Action {

@@ -1,28 +1,32 @@
-@(tried: String, falseRegistration: Boolean)
+@(reviews: List[Review])
 @main("Edit Reviews") {
     <section id="loginbox text-center justify-content-center">
         <div class="limiter">
             <div class="container-login100" style="background-image: url(@routes.Assets.versioned("/images/bg-01.jpg"));">
                 <div class="wrap-login100">
                     <a href="@routes.HomeController.index()" style="color: white">Back to Home</a>
-                    <form class="login100-form validate-form" action="/afterReview" method=POST>
+                    <form class="login100-form validate-form" action="/afterEditReview" method=POST>
                         <span class="login100-form-title mt-4 p-b-34 p-t-27">
                             Edit Review
                         </span>
-                        <select>
-                            <option value="review">Edit Review</option>
-                        </select>
-                        <input type="hidden" name="attractionID" value="">
-                        <input type="hidden" name="authorEmail" value="">
+                        @for(i <- 0 to reviews.length - 1) {
+
+                        <input type="hidden" name="associatedID"@i value="@reviews(i).associatedID">
+                        <input type="hidden" name="authorEmail"@i value="@reviews(i).authorEmail">
+                        <input type="hidden" name="oldTitle"@i value="@reviews(i).title">
+                        <input type="hidden" name="oldBody"@i value="@reviews(i).body">
+                        <input type="hidden" name="oldRating"@i value="@reviews(i).score">
+                            <br>
+                            <h3>Change Review: </h3>
                         <div class="wrap-input100 validate-input" data-validate = "Review Title">
-                            <input class="input100" type="text" name="title" placeholder="Review Title">
+                            <input class="input100" type="text" name="title" value="@reviews(i).title">
                         </div>
                         <div class="wrap-input100 validate-input" data-validate = "rating">
-                            <input class="input100" min="1" max="5" type="number" name="rating" placeholder="Rating (out of 5)">
+                            <input class="input100" min="1" max="5" type="number" name="score" value="@reviews(i).score">
                         </div>
-                        <textarea name="body" rows="10" class="mb-2" cols="50%">Enter Description</textarea>
-
-
+                        <textarea name="body" rows="10" class="mb-2" cols="50%">@reviews(i).body</textarea>
+                        }
+                        <input type="hidden" name="numberReviews" value="@reviews.length">
                         <div class="container-login100-form-btn">
                             <button class="login100-form-btn">
                                 Submit
@@ -35,10 +39,6 @@
 
 
         <div id="dropDownSelect1"></div>
-        <script>
-            @if(falseRegistration) {
-                alert("The email you have attempted to register already exists.");
-            }
-        </script>
+
     </section>
 }

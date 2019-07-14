@@ -6,6 +6,7 @@ GET /logout controllers.HomeController.logout
 GET /home controllers.HomeController.index
 GET  /assets/*file   controllers.Assets.versioned(path="/public", file)
 GET /place/:id controllers.HomeController.place(id: String)
+GET /editReviews/:id controllers.HomeController.editReviews(id: String)
 GET /deleteReview/:id controllers.HomeController.deleteReview(id: String)
 GET /after controllers.HomeController.before
 GET /changepassword controllers.HomeController.changepassword
@@ -26,3 +27,6 @@ POST /aftereditpass controllers.HomeController.aftereditpass
 POST /afterEditAttraction controllers.HomeController.afterEditAttraction
 + nocsrf
 POST /afterReview controllers.HomeController.afterReview
++ nocsrf
+POST /afterEditReview controllers.HomeController.afterEditReview
++ nocsrf

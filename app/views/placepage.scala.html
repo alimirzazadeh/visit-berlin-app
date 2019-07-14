@@ -31,6 +31,9 @@
                                         <li><a href="@routes.HomeController.login()">Login</a></li>
                                         <li><a href="@routes.HomeController.register()">Register</a></li>
                                         <li><a href="@routes.HomeController.manageAccount()">Manage Account</a></li>
+                                        @if(accountlogged != null) {
+                                            <li><a href="@routes.HomeController.editReviews(accountlogged.email)">Edit Reviews</a></li>
+                                        }
                                     </ul>
                                 </li>
                                 <li class="active"><a href=@routes.HomeController.index()>Home</a></li>
