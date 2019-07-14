@@ -91,7 +91,9 @@
                                     <h5>@review.title</h5>
                                     <p>&ldquo;@review.body&rdquo;</p>
                                     <p class="small">&mdash; @review.authorEmail</p>
-                                    <a href="">Delete This Review</a>
+                                    @if(accountlogged.admin) {
+                                        <a href="">Delete This Review</a>
+                                    }
                                 </div>
                             }
                             <div class="block-testimony">
