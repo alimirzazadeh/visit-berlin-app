@@ -103,13 +103,11 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       request.body.asFormUrlEncoded.get("interests").head)
     val newAccount = Account(request.body.asFormUrlEncoded.get("email").head,
       HomeController.logaccount.saltedHash,
-      newProfile,
-      // Change this to check user input match to the admin password's salt-free hash
-      admin = true)
+      newProfile, HomeController.logaccount.admin)
     val accMan = new AccountManager
-    accMan.writeToCSV(accMan.editAccount(HomeController.logaccount, newAccount));
-    HomeController.logaccount = newAccount;
-    Ok(views.html.index(newAccount, attractions));
+    accMan.writeToCSV(accMan.editAccount(HomeController.logaccount, newAccount))
+    HomeController.logaccount = newAccount
+    Ok(views.html.index(newAccount, attractions))
   }
 
   def aftereditpass = Action { implicit request =>
@@ -143,10 +141,10 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     val attMan = new AttractionManager()
     System.out.println(request.body.asFormUrlEncoded)
     for(i <- 0 to request.body.asFormUrlEncoded.get("numberReviews").head.toInt - 1) {
-      var oldReview = new Review(request.body.asFormUrlEncoded.get("oldTitle")(i),
+      val oldReview = new Review(request.body.asFormUrlEncoded.get("oldTitle")(i),
         request.body.asFormUrlEncoded.get("oldBody")(i), request.body.asFormUrlEncoded.get("authorEmail")(i),
         request.body.asFormUrlEncoded.get("associatedID")(i).toInt, request.body.asFormUrlEncoded.get("oldRating")(i).toInt)
-      var newReview = new Review(request.body.asFormUrlEncoded.get("title")(i),
+      val newReview = new Review(request.body.asFormUrlEncoded.get("title")(i),
         request.body.asFormUrlEncoded.get("body")(i), request.body.asFormUrlEncoded.get("authorEmail")(i),
         request.body.asFormUrlEncoded.get("associatedID")(i).toInt, request.body.asFormUrlEncoded.get("score")(i).toInt)
       revMan.writeToCSV(revMan.editReview(oldReview, newReview))
@@ -195,9 +193,9 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       Account.hashPasswordPlusSalt(request.body.asFormUrlEncoded.get("password").head),
       newProfile, adminInput == AccountManager.adminHash)
     if (adminInput != "password" && adminInput != AccountManager.adminHash) {
-      Ok(views.html.register(assetsFinder, true))
+      Ok(views.html.register(assetsFinder, wrongAdminPassword=true))
     } else if (accMan.findAccount(accMan.readFromCSV, newAccount)) {
-      Ok(views.html.login(null, true))
+      Ok(views.html.login(null, falseRegistration=true))
     } else {
       accMan.writeToCSV(accMan.addAccount(newAccount))
       HomeController.logaccount = newAccount

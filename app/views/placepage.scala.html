@@ -95,7 +95,7 @@
                                     <h5>Rating: @review.score out of 5 stars</h5>
                                     <h5>@review.title</h5>
                                     <p>&ldquo;@review.body&rdquo;</p>
-                                    <p class="small">&mdash; @review.authorEmail</p>
+                                    <p class="small">&mdash; @review.retrieveAuthorName</p>
                                     @if(accountlogged.admin) {
                                         <a id="deletereview" href="/deleteReview/@review.title">Delete This Review</a>
                                     }

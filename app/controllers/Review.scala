@@ -2,6 +2,13 @@ package controllers
 
 case class Review(title: String, body: String, authorEmail: String, associatedID: Int, score: Int) {
 
+  def retrieveAuthorName: String = {
+    val accMan = new AccountManager
+    val retrievedAccount = accMan.accountFromEmail(authorEmail)
+    if (retrievedAccount != null) retrievedAccount.profile.firstName + " " + retrievedAccount.profile.lastName else
+      "DEFAULT NAME"
+  }
+
   require(score >= 1 && score <= 10)
 
   def changeBody(newBody: String): Review = copy(body = newBody)

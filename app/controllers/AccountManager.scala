@@ -114,6 +114,12 @@ class AccountManager {
     accounts.exists(_.email == account.email)
   }
 
+  def accountFromEmail(email: String): Account = {
+    val foundAccounts = readFromCSV.filter(_.email == email)
+    if (foundAccounts.nonEmpty) foundAccounts.head
+    else null
+  }
+
   /*
     * Using an email and a password, find if the account exists, find if the password is correct,
     * and return the matching account object from the csv file if the email and password matches the account
