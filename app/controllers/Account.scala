@@ -3,7 +3,7 @@ package controllers
 import java.security.MessageDigest
 import scala.util.Random
 
-/**
+/*
   * Class containing all data for a user's account as well as the functions to cryptographically
   * secure user passwords and edit existing data. Account instances contain all relevant user
   * data, including a personal profile, and form the structure for registering, logging in, and
@@ -21,7 +21,7 @@ import scala.util.Random
   */
 case class Account(email: String, saltedHash: (String, String), profile: Profile, admin: Boolean) {
 
-  /**
+  /*
     * Performs a regex matching operation to ensure the email String is in proper email format
     */
   require(
@@ -30,14 +30,14 @@ case class Account(email: String, saltedHash: (String, String), profile: Profile
     email.split("@")(0).length() <= 64 &&
     email.split("@")(1).length() <= 255, "Email address is of improper format.")
 
-  /**
+  /*
     * Submits a new user account containing the provided new email
     * @param newEmail new email String provided by the user during editing
     * @return the updated account
     */
   def changeEmail(newEmail: String): Account = copy(email = newEmail)
 
-  /**
+  /*
     * Submits a new user account containing the new password hash with a new salt
     * @param newPassword new raw password String provided by the user during editing,
     *                    given to the same hash function with a newly generated salt
@@ -45,7 +45,7 @@ case class Account(email: String, saltedHash: (String, String), profile: Profile
     */
   def changePassword(newPassword: String): Account = copy(saltedHash = Account.hashPasswordPlusSalt(newPassword))
 
-  /**
+  /*
     * Submits a list of Strings containing the account email, password hash, salt, and admin value
     * @return the account data transformed to a String list
     */
@@ -53,7 +53,7 @@ case class Account(email: String, saltedHash: (String, String), profile: Profile
     List(s"$email", s"${saltedHash._1}", s"${saltedHash._2}", s"$admin")
   }
 
-  /**
+  /*
     * Overrides generic equals method to check the equality of two accounts by the equality
     * of their email Strings and password hash Strings, as identical hashes imply identical salts
     * @param other the Object being checked for equality to this one
@@ -67,7 +67,7 @@ case class Account(email: String, saltedHash: (String, String), profile: Profile
     }
   }
 
-  /**
+  /*
     * Overrides generic toString method to return the relevant data of the account as a String
     * @return a String containing the account email, password hash, and salt
     */
@@ -76,13 +76,13 @@ case class Account(email: String, saltedHash: (String, String), profile: Profile
   }
 }
 
-/**
+/*
   * Companion object for Account class containing non-instance-specific functions for
   * generating salts and cryptographically hashing password Strings
   */
 object Account {
 
-  /**
+  /*
     * Generate a random salt String and hash the raw password with the salt appended
     * @param password the raw password String provided by user input
     * @return a tuple containing the password hash and its associated salt
@@ -92,7 +92,7 @@ object Account {
     (hashPassword(password, localSalt), localSalt)
   }
 
-  /**
+  /*
     * Performs an SHA-256 cryptographic hash on the String representing the raw password
     * with a given salt appended to it
     * @param password the raw password String provided by user input
@@ -106,7 +106,7 @@ object Account {
       .map("%02x".format(_)).mkString
   }
 
-  /**
+  /*
     * Generates a random alphanumeric String of variable length by randomly selecting that
     * number of characters with replacement from the given sample string, then making the
     * character list into a String
@@ -125,7 +125,7 @@ object Account {
     generateSalt(n, List()).mkString
   }
 
-  /**
+  /*
     * Generates an eight-length salt
     * @return the conventional result of the generateSalt function with length parameter 8
     */

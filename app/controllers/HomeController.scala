@@ -6,7 +6,7 @@ import play.api.data._
 import play.api.data.Forms._
 import models.UserData
 
-/**
+/*
   * Class containing the controlling logic for the different pages on
   * the Berlin website and their navigation
   */
@@ -79,6 +79,11 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.index(null, attractions))
   }
 
+  def editReviews(id: String) = Action {
+    val revMan = new ReviewManager()
+    Ok(views.html.accountreviews(revMan.reviewsByEmail(id)))
+  }
+
   def place(id: String) = Action {
     val attMan = new AttractionManager()
     val revMan = new ReviewManager()
@@ -86,7 +91,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.placepage("Account", assetsFinder, attraction, HomeController.logaccount, revMan.supplyReviews(attraction.attractionID)))
       //change this to id instead of name eventually
   }
-  /**
+  /*
     * Collects the information from the registration form to create an account
     */
   def afteredit = Action { implicit request =>
@@ -131,6 +136,22 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     rm.writeToCSV(rm.addReview(review))
     System.out.println(attman.attractionFromID(request.body.asFormUrlEncoded.get("attractionID").head.toInt))
     Ok(views.html.placepage("Account", assetsFinder, attraction, HomeController.logaccount, rm.supplyReviews(attraction.attractionID)))
+  }
+
+  def afterEditReview = Action { implicit request =>
+    val revMan = new ReviewManager()
+    val attMan = new AttractionManager()
+    System.out.println(request.body.asFormUrlEncoded)
+    for(i <- 0 to request.body.asFormUrlEncoded.get("numberReviews").head.toInt - 1) {
+      var oldReview = new Review(request.body.asFormUrlEncoded.get("oldTitle")(i),
+        request.body.asFormUrlEncoded.get("oldBody")(i), request.body.asFormUrlEncoded.get("authorEmail")(i),
+        request.body.asFormUrlEncoded.get("associatedID")(i).toInt, request.body.asFormUrlEncoded.get("oldRating")(i).toInt)
+      var newReview = new Review(request.body.asFormUrlEncoded.get("title")(i),
+        request.body.asFormUrlEncoded.get("body")(i), request.body.asFormUrlEncoded.get("authorEmail")(i),
+        request.body.asFormUrlEncoded.get("associatedID")(i).toInt, request.body.asFormUrlEncoded.get("score")(i).toInt)
+      revMan.writeToCSV(revMan.editReview(oldReview, newReview))
+    }
+    Ok(views.html.index(HomeController.logaccount, attMan.readFromCSV))
   }
 
   def deleteReview(id: String) = Action {
@@ -184,7 +205,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     }
   }
 
-  /**
+  /*
     * Logic for verifying a correct login with the correct password and email
     */
   def afterlogin = Action { implicit request =>
@@ -203,7 +224,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       }
   }
 
-  /**
+  /*
     * The structure of the user form for registration
     */
   val userForm = Form(

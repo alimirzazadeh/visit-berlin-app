@@ -1,0 +1,301 @@
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:3:14: object inject is not a member of package javax[0m
+[0m[[0m[31merror[0m] [0m[0mimport javax.inject._[0m
+[0m[[0m[31merror[0m] [0m[0m             ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:4:8: not found: object play[0m
+[0m[[0m[31merror[0m] [0m[0mimport play.api.mvc._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:5:8: not found: object play[0m
+[0m[[0m[31merror[0m] [0m[0mimport play.api.data._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:6:8: not found: object play[0m
+[0m[[0m[31merror[0m] [0m[0mimport play.api.data.Forms._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:7:8: not found: object models[0m
+[0m[[0m[31merror[0m] [0m[0mimport models.UserData[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:14:11: not found: type AbstractController[0m
+[0m[[0m[31merror[0m] [0m[0m  extends AbstractController(cc) {[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:13:36: not found: type ControllerComponents[0m
+[0m[[0m[31merror[0m] [0m[0mclass HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: AssetsFinder)[0m
+[0m[[0m[31merror[0m] [0m[0m                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:13:81: not found: type AssetsFinder[0m
+[0m[[0m[31merror[0m] [0m[0mclass HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: AssetsFinder)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:13:23: not found: type Inject[0m
+[0m[[0m[31merror[0m] [0m[0mclass HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: AssetsFinder)[0m
+[0m[[0m[31merror[0m] [0m[0m                      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:14:30: no arguments allowed for nullary constructor Object: ()Object[0m
+[0m[[0m[31merror[0m] [0m[0m  extends AbstractController(cc) {[0m
+[0m[[0m[31merror[0m] [0m[0m                             ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:16:15: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def hello = Action {[0m
+[0m[[0m[31merror[0m] [0m[0m              ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:17:5: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.hello())[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:17:8: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.hello())[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:20:22: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def createReview = Action {[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:21:5: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.createreview("", false))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:21:8: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.createreview("", false))[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:24:16: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def before = Action {[0m
+[0m[[0m[31merror[0m] [0m[0m               ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:25:5: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.hello())[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:25:8: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.hello())[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:28:21: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def beforelogin = Action {[0m
+[0m[[0m[31merror[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:29:5: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.login(null, falseRegistration = false))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:29:8: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.login(null, falseRegistration = false))[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:29:31: not found: value falseRegistration[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.login(null, falseRegistration = false))[0m
+[0m[[0m[31merror[0m] [0m[0m                              ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:33:15: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def index = Action {[0m
+[0m[[0m[31merror[0m] [0m[0m              ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:37:7: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.index(null, attMan.readFromCSV))[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:37:10: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.index(null, attMan.readFromCSV))[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:39:7: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.index(HomeController.logaccount, attMan.readFromCSV))[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:39:10: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.index(HomeController.logaccount, attMan.readFromCSV))[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:43:32: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def changepage(id: String) = Action {[0m
+[0m[[0m[31merror[0m] [0m[0m                               ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:49:5: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.changepages(null, assetsFinder, attraction))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:49:8: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.changepages(null, assetsFinder, attraction))[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:52:23: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def manageAccount = Action {[0m
+[0m[[0m[31merror[0m] [0m[0m                      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:55:7: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.manageAccount(HomeController.logaccount, assetsFinder))[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:55:10: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.manageAccount(HomeController.logaccount, assetsFinder))[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:57:7: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.index(null, attMan.readFromCSV))[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:57:10: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.index(null, attMan.readFromCSV))[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:61:18: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def register = Action {[0m
+[0m[[0m[31merror[0m] [0m[0m                 ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:63:67: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m    if (HomeController.logaccount.email == "example@example.com") Ok(views.html.register([0m
+[0m[[0m[31merror[0m] [0m[0m                                                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:63:70: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m    if (HomeController.logaccount.email == "example@example.com") Ok(views.html.register([0m
+[0m[[0m[31merror[0m] [0m[0m                                                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:64:21: not found: value wrongAdminPassword[0m
+[0m[[0m[31merror[0m] [0m[0m      assetsFinder, wrongAdminPassword=false)) else[0m
+[0m[[0m[31merror[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:65:7: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.index(HomeController.logaccount, attMan.readFromCSV))[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:65:10: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.index(HomeController.logaccount, attMan.readFromCSV))[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:68:15: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def login = Action {[0m
+[0m[[0m[31merror[0m] [0m[0m              ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:69:5: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.login(null, falseRegistration = false))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:69:8: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.login(null, falseRegistration = false))[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:69:31: not found: value falseRegistration[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.login(null, falseRegistration = false))[0m
+[0m[[0m[31merror[0m] [0m[0m                              ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:72:24: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def changepassword = Action {[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:73:5: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.changepassword(null))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:73:8: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.changepassword(null))[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:76:16: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def logout = Action {[0m
+[0m[[0m[31merror[0m] [0m[0m               ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:79:5: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.index(null, attractions))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:79:8: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.index(null, attractions))[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:82:27: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def place(id: String) = Action {[0m
+[0m[[0m[31merror[0m] [0m[0m                          ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:86:5: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.placepage("Account", assetsFinder, attraction, HomeController.logaccount, revMan.supplyReviews(attraction.attractionID)))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:86:8: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.placepage("Account", assetsFinder, attraction, HomeController.logaccount, revMan.supplyReviews(attraction.attractionID)))[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:92:19: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def afteredit = Action { implicit request =>[0m
+[0m[[0m[31merror[0m] [0m[0m                  ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:107:35: not found: value newAccountc[0m
+[0m[[0m[31merror[0m] [0m[0m      HomeController.logaccount = newAccountc[0m
+[0m[[0m[31merror[0m] [0m[0m                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:108:7: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.index(newAccount, attractions))[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:108:10: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.index(newAccount, attractions))[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:110:7: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.register(assetsFinder, wrongAdminPassword=true))[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:110:10: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.register(assetsFinder, wrongAdminPassword=true))[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:110:44: not found: value wrongAdminPassword[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.register(assetsFinder, wrongAdminPassword=true))[0m
+[0m[[0m[31merror[0m] [0m[0m                                           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:114:23: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def aftereditpass = Action { implicit request =>[0m
+[0m[[0m[31merror[0m] [0m[0m                      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:122:7: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.index(HomeController.logaccount, attractions))[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:122:10: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.index(HomeController.logaccount, attractions))[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:124:7: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.changepassword("PASSWORDS MUST MATCH"))[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:124:10: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.changepassword("PASSWORDS MUST MATCH"))[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:128:21: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def afterReview = Action { implicit request =>[0m
+[0m[[0m[31merror[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:137:5: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.placepage("Account", assetsFinder, attraction, HomeController.logaccount, rm.supplyReviews(attraction.attractionID)))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:137:8: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.placepage("Account", assetsFinder, attraction, HomeController.logaccount, rm.supplyReviews(attraction.attractionID)))[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:140:34: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def deleteReview(id: String) = Action {[0m
+[0m[[0m[31merror[0m] [0m[0m                                 ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:145:5: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.placepage("Account", assetsFinder, attraction, HomeController.logaccount, rm.supplyReviews(attraction.attractionID)))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:145:8: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.placepage("Account", assetsFinder, attraction, HomeController.logaccount, rm.supplyReviews(attraction.attractionID)))[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:148:29: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def afterEditAttraction = Action { implicit request =>[0m
+[0m[[0m[31merror[0m] [0m[0m                            ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:159:7: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.placepage("idk", assetsFinder, newPage, HomeController.logaccount, rm.supplyReviews(newPage.attractionID)))[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:159:10: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.placepage("idk", assetsFinder, newPage, HomeController.logaccount, rm.supplyReviews(newPage.attractionID)))[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:162:14: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def edit = Action {[0m
+[0m[[0m[31merror[0m] [0m[0m             ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:163:5: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.manageAccount(HomeController.logaccount, assetsFinder))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:163:8: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.manageAccount(HomeController.logaccount, assetsFinder))[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:166:15: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def after = Action { implicit request =>[0m
+[0m[[0m[31merror[0m] [0m[0m              ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:181:7: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.register(assetsFinder, true))[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:181:10: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.register(assetsFinder, true))[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:183:7: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.login(null, true))[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:183:10: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.login(null, true))[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:187:7: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.index(newAccount, attractions))[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:187:10: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.index(newAccount, attractions))[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:194:20: not found: value Action[0m
+[0m[[0m[31merror[0m] [0m[0m  def afterlogin = Action { implicit request =>[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:201:20: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m      case None => Ok(views.html.login("INCORRECT PASSWORD", falseRegistration = false))[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:201:23: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m      case None => Ok(views.html.login("INCORRECT PASSWORD", falseRegistration = false))[0m
+[0m[[0m[31merror[0m] [0m[0m                      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:201:62: not found: value falseRegistration[0m
+[0m[[0m[31merror[0m] [0m[0m      case None => Ok(views.html.login("INCORRECT PASSWORD", falseRegistration = false))[0m
+[0m[[0m[31merror[0m] [0m[0m                                                             ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:204:9: not found: value Ok[0m
+[0m[[0m[31merror[0m] [0m[0m        Ok(views.html.index(userAccount, attractions))[0m
+[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:204:12: not found: value views[0m
+[0m[[0m[31merror[0m] [0m[0m        Ok(views.html.index(userAccount, attractions))[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:213:18: not found: value Form[0m
+[0m[[0m[31merror[0m] [0m[0m  val userForm = Form([0m
+[0m[[0m[31merror[0m] [0m[0m                 ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:214:5: not found: value mapping[0m
+[0m[[0m[31merror[0m] [0m[0m    mapping([0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:215:22: package scala.text is not a value[0m
+[0m[[0m[31merror[0m] [0m[0m      "firstname" -> text,[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:216:21: package scala.text is not a value[0m
+[0m[[0m[31merror[0m] [0m[0m      "lastname" -> text,[0m
+[0m[[0m[31merror[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:217:18: package scala.text is not a value[0m
+[0m[[0m[31merror[0m] [0m[0m      "email" -> text,[0m
+[0m[[0m[31merror[0m] [0m[0m                 ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:218:21: package scala.text is not a value[0m
+[0m[[0m[31merror[0m] [0m[0m      "hometown" -> text,[0m
+[0m[[0m[31merror[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:219:22: package scala.text is not a value[0m
+[0m[[0m[31merror[0m] [0m[0m      "interests" -> text,[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\npoul\CS2340\visit-berlin-app-team3\app\controllers\HomeController.scala:220:21: package scala.text is not a value[0m
+[0m[[0m[31merror[0m] [0m[0m      "password" -> text,[0m
+[0m[[0m[31merror[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m109 errors found[0m

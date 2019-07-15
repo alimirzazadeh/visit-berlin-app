@@ -4,7 +4,7 @@ import java.io.File
 import java.io.PrintWriter
 import scala.io.Source
 
-/**
+/*
   * Class representing an AccountManager that is capable of writing user-generated accounts into
   * a persistent CSV file, reading the list of all valid accounts from said file, and performing
   * adds, removes, and edits as users register new accounts, change account details, or delete
@@ -15,11 +15,11 @@ import scala.io.Source
   */
 class AccountManager {
 
-  /** Uses tail recursion to read a CSV file with all of the information of the accounts
+  /* Uses tail recursion to read a CSV file with all of the information of the accounts
     * @return a list of accounts that can be easily used by other functions
    */
   def readFromCSV: List[Account] = {
-    /**
+    /*
       * Takes a line from a csv file string iterator and converts it into an account object, which
       * is then added to a list and returned
       * @param accounts current list of account objects
@@ -49,7 +49,7 @@ class AccountManager {
     }
   }
 
-  /**
+  /*
     * Takes a list of accounts and writes them into a csv file
     * @param accounts A list of account objects
     */
@@ -66,7 +66,7 @@ class AccountManager {
     writer.close()
   }
 
-  /**
+  /*
     * Gives a new list of account objects, which is updated with a new account if that account
     * does not yet exist within the file
     * @param acc a new account object to be added to the list
@@ -79,7 +79,7 @@ class AccountManager {
     updatedAccounts
   }
 
-  /**
+  /*
     * Filters an account object out of a list of accounts if the account exists
     * @param acc account to be deleted
     * @return a list of accounts without the account passed as a parameter. If the account
@@ -91,7 +91,7 @@ class AccountManager {
     updatedAccounts
   }
 
-  /**
+  /*
     * Filters an old account object out of a list of accounts and then adds a new account instead,
     * allowing users to change data in their account and still maintain their account in the csv file
     * @param oldAcc the original account
@@ -104,7 +104,7 @@ class AccountManager {
     updatedAccounts
   }
 
-  /**
+  /*
     * Decides whether an account exists in an account list based off of the account email
     * @param accounts the list of accounts to be searched
     * @param account the account that may be found by the method
@@ -114,7 +114,7 @@ class AccountManager {
     accounts.exists(_.email == account.email)
   }
 
-  /**
+  /*
     * Using an email and a password, find if the account exists, find if the password is correct,
     * and return the matching account object from the csv file if the email and password matches the account
     * @param email the email of the account the user is attempting to log into
@@ -132,7 +132,7 @@ class AccountManager {
   }
 }
 
-/**
+/*
   * Companion object for AccountManager which has a filename variable representing a csv file
   * containing all current user accounts that can be used in methods within the class.
   * Also contains a main method which is used to test different methods on a smaller scale and
@@ -140,18 +140,18 @@ class AccountManager {
   */
 object AccountManager {
 
-  /**
+  /*
     *  We wouldn't normally include this in the source code for security purposes, but this string
     *  represents the salt-free cryptographic hash of our admin password, "scalaisthefuture"
     */
   final val adminHash: String = "ab867cba53df0946b0c0bf0084503f8c70ff995fa615ee2f131cacf45c60cb15"
 
-  /**
+  /*
     * String location representing where our persistent file containing all user accounts resides
     */
   val filename: String = "public/accounts.csv"
 
-  /**
+  /*
     * Main method for running tests on accounts and account manager
     * @param args argument Strings potentially provided to name
     */
