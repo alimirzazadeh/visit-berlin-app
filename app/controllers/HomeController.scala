@@ -6,7 +6,7 @@ import play.api.data._
 import play.api.data.Forms._
 import models.UserData
 
-/**
+/*
   * Class containing the controlling logic for the different pages on
   * the Berlin website and their navigation
   */
@@ -91,7 +91,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     Ok(views.html.placepage("Account", assetsFinder, attraction, HomeController.logaccount, revMan.supplyReviews(attraction.attractionID)))
       //change this to id instead of name eventually
   }
-  /**
+  /*
     * Collects the information from the registration form to create an account
     */
   def afteredit = Action { implicit request =>
@@ -205,7 +205,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
     }
   }
 
-  /**
+  /*
     * Logic for verifying a correct login with the correct password and email
     */
   def afterlogin = Action { implicit request =>
@@ -224,7 +224,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit assetsFinder: 
       }
   }
 
-  /**
+  /*
     * The structure of the user form for registration
     */
   val userForm = Form(
